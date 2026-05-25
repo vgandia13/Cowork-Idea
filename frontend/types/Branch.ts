@@ -1,3 +1,5 @@
+import { Service } from "./Service";
+
 export interface Branch {
     id: string;
     name: string;
@@ -14,6 +16,6 @@ export interface Branch {
     longitude: number;
     cover: string;
     gallery: string[];
-    services: string[];
+    services: Service[];
     active: boolean;
 }
