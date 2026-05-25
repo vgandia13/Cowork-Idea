@@ -8,7 +8,10 @@ use Src\BC\Subscription\Application\UseCase\CheckSubscriptionExistsUseCase;
 use Src\BC\Subscription\Application\UseCase\CreateSubscriptionUseCase;
 use Src\BC\Subscription\Application\UseCase\DeleteSubscriptionUseCase;
 use Src\BC\Subscription\Application\UseCase\ListSubscriptionsUseCase;
+use Src\BC\Subscription\Application\UseCase\ListUserSubscriptionsUseCase;
+use Src\BC\Subscription\Application\UseCase\ReadActiveUserSubscriptionUseCase;
 use Src\BC\Subscription\Application\UseCase\ReadSubscriptionUseCase;
+use Src\BC\Subscription\Application\UseCase\ToggleStatusSubscriptionUseCase;
 use Src\BC\Subscription\Application\UseCase\UpdateSubscriptionUseCase;
 use Src\BC\Subscription\Infrastructure\Repositories\EloquentSubscriptionRepository;
 
@@ -50,6 +53,24 @@ class DependencyInversionServices extends ServiceProvider
 
         $this->app->bind(CheckSubscriptionExistsUseCase::class, function ($app) {
             return new CheckSubscriptionExistsUseCase(
+                $app->make(SubscriptionRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ToggleStatusSubscriptionUseCase::class, function ($app) {
+            return new ToggleStatusSubscriptionUseCase(
+                $app->make(SubscriptionRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ListUserSubscriptionsUseCase::class, function ($app) {
+            return new ListUserSubscriptionsUseCase(
+                $app->make(SubscriptionRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ReadActiveUserSubscriptionUseCase::class, function ($app) {
+            return new ReadActiveUserSubscriptionUseCase(
                 $app->make(SubscriptionRepositoryPort::class)
             );
         });

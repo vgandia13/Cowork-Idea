@@ -62,4 +62,21 @@ class EloquentSubscriptionRepository implements SubscriptionRepositoryPort
     {
         return $this->countAllFromModel();
     }
+
+    public function findByUserId(string $userId): array
+    {
+        $models = SubscriptionModel::where('user_id', $userId)->get();
+        return $models->map(fn($model) => SubscriptionHydrator::toEntity($model))->toArray();
+    }
+
+    public function findActiveByUserId(string $userId): ?Subscription
+    {
+        $model = SubscriptionModel::where('user_id', $userId)
+            ->where('is_active', true)
+            ->first();
+        if (!$model) {
+            return null;
+        }
+        return SubscriptionHydrator::toEntity($model);
+    }
 }

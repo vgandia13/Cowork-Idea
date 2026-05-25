@@ -8,9 +8,13 @@ use Src\BC\Coworking\Application\UseCase\CheckCoworkingExistsUseCase;
 use Src\BC\Coworking\Application\UseCase\CreateCoworkingUseCase;
 use Src\BC\Coworking\Application\UseCase\DeleteCoworkingUseCase;
 use Src\BC\Coworking\Application\UseCase\ListCoworkingsUseCase;
+use Src\BC\Coworking\Application\UseCase\ListCoworkingSpacesUseCase;
+use Src\BC\Coworking\Application\UseCase\ReadCoworkingBySlugUseCase;
 use Src\BC\Coworking\Application\UseCase\ReadCoworkingUseCase;
+use Src\BC\Coworking\Application\UseCase\ToggleActiveCoworkingUseCase;
 use Src\BC\Coworking\Application\UseCase\UpdateCoworkingUseCase;
 use Src\BC\Coworking\Infrastructure\Repositories\EloquentCoworkingRepository;
+use Src\BC\Space\Application\Port\SpaceRepositoryPort;
 
 class DependencyInversionServices extends ServiceProvider
 {
@@ -51,6 +55,24 @@ class DependencyInversionServices extends ServiceProvider
         $this->app->bind(CheckCoworkingExistsUseCase::class, function ($app) {
             return new CheckCoworkingExistsUseCase(
                 $app->make(CoworkingRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ReadCoworkingBySlugUseCase::class, function ($app) {
+            return new ReadCoworkingBySlugUseCase(
+                $app->make(CoworkingRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ToggleActiveCoworkingUseCase::class, function ($app) {
+            return new ToggleActiveCoworkingUseCase(
+                $app->make(CoworkingRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ListCoworkingSpacesUseCase::class, function ($app) {
+            return new ListCoworkingSpacesUseCase(
+                $app->make(SpaceRepositoryPort::class)
             );
         });
     }

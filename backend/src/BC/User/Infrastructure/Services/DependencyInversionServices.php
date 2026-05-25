@@ -9,6 +9,7 @@ use Src\BC\User\Application\UseCase\CreateUserUseCase;
 use Src\BC\User\Application\UseCase\DeleteUserUseCase;
 use Src\BC\User\Application\UseCase\ListUsersUseCase;
 use Src\BC\User\Application\UseCase\ReadUserUseCase;
+use Src\BC\User\Application\UseCase\ToggleActiveUserUseCase;
 use Src\BC\User\Application\UseCase\UpdateUserUseCase;
 use Src\BC\User\Infrastructure\Repositories\EloquentUserRepository;
 
@@ -50,6 +51,12 @@ class DependencyInversionServices extends ServiceProvider
 
         $this->app->bind(CheckUserExistsUseCase::class, function ($app) {
             return new CheckUserExistsUseCase(
+                $app->make(UserRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ToggleActiveUserUseCase::class, function ($app) {
+            return new ToggleActiveUserUseCase(
                 $app->make(UserRepositoryPort::class)
             );
         });

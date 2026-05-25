@@ -62,4 +62,13 @@ class EloquentCoworkingRepository implements CoworkingRepositoryPort
     {
         return $this->countAllFromModel();
     }
+
+    public function findBySlug(string $slug): ?Coworking
+    {
+        $model = CoworkingModel::where('slug', $slug)->first();
+        if (!$model) {
+            return null;
+        }
+        return CoworkingHydrator::toEntity($model);
+    }
 }

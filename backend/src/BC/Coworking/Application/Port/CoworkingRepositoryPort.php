@@ -18,4 +18,6 @@ interface CoworkingRepositoryPort
     public function findAll(int $page = 1, int $perPage = 15): array;
 
     public function countAll(): int;
+
+    public function findBySlug(string $slug): ?Coworking;
 }

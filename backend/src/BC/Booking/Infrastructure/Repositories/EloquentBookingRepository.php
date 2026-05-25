@@ -62,4 +62,25 @@ class EloquentBookingRepository implements BookingRepositoryPort
     {
         return $this->countAllFromModel();
     }
+
+    public function findByBookingCode(string $bookingCode): ?Booking
+    {
+        $model = BookingModel::where('booking_code', $bookingCode)->first();
+        if (!$model) {
+            return null;
+        }
+        return BookingHydrator::toEntity($model);
+    }
+
+    public function findByUserId(string $userId): array
+    {
+        $models = BookingModel::where('user_id', $userId)->get();
+        return $models->map(fn($model) => BookingHydrator::toEntity($model))->toArray();
+    }
+
+    public function findBySpaceId(string $spaceId): array
+    {
+        $models = BookingModel::where('space_id', $spaceId)->get();
+        return $models->map(fn($model) => BookingHydrator::toEntity($model))->toArray();
+    }
 }

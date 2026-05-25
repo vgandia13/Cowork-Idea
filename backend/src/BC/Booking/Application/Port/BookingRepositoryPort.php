@@ -18,4 +18,10 @@ interface BookingRepositoryPort
     public function findAll(int $page = 1, int $perPage = 15): array;
 
     public function countAll(): int;
+
+    public function findByBookingCode(string $bookingCode): ?Booking;
+
+    public function findByUserId(string $userId): array;
+
+    public function findBySpaceId(string $spaceId): array;
 }

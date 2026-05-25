@@ -8,7 +8,10 @@ use Src\BC\Booking\Application\UseCase\CheckBookingExistsUseCase;
 use Src\BC\Booking\Application\UseCase\CreateBookingUseCase;
 use Src\BC\Booking\Application\UseCase\DeleteBookingUseCase;
 use Src\BC\Booking\Application\UseCase\ListBookingsUseCase;
+use Src\BC\Booking\Application\UseCase\ListUserBookingsUseCase;
+use Src\BC\Booking\Application\UseCase\ReadBookingByCodeUseCase;
 use Src\BC\Booking\Application\UseCase\ReadBookingUseCase;
+use Src\BC\Booking\Application\UseCase\ToggleStatusBookingUseCase;
 use Src\BC\Booking\Application\UseCase\UpdateBookingUseCase;
 use Src\BC\Booking\Infrastructure\Repositories\EloquentBookingRepository;
 
@@ -50,6 +53,24 @@ class DependencyInversionServices extends ServiceProvider
 
         $this->app->bind(CheckBookingExistsUseCase::class, function ($app) {
             return new CheckBookingExistsUseCase(
+                $app->make(BookingRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ReadBookingByCodeUseCase::class, function ($app) {
+            return new ReadBookingByCodeUseCase(
+                $app->make(BookingRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ToggleStatusBookingUseCase::class, function ($app) {
+            return new ToggleStatusBookingUseCase(
+                $app->make(BookingRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ListUserBookingsUseCase::class, function ($app) {
+            return new ListUserBookingsUseCase(
                 $app->make(BookingRepositoryPort::class)
             );
         });

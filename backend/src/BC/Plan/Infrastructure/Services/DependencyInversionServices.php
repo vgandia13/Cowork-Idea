@@ -9,6 +9,7 @@ use Src\BC\Plan\Application\UseCase\CreatePlanUseCase;
 use Src\BC\Plan\Application\UseCase\DeletePlanUseCase;
 use Src\BC\Plan\Application\UseCase\ListPlansUseCase;
 use Src\BC\Plan\Application\UseCase\ReadPlanUseCase;
+use Src\BC\Plan\Application\UseCase\ToggleActivePlanUseCase;
 use Src\BC\Plan\Application\UseCase\UpdatePlanUseCase;
 use Src\BC\Plan\Infrastructure\Repositories\EloquentPlanRepository;
 
@@ -50,6 +51,12 @@ class DependencyInversionServices extends ServiceProvider
 
         $this->app->bind(CheckPlanExistsUseCase::class, function ($app) {
             return new CheckPlanExistsUseCase(
+                $app->make(PlanRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ToggleActivePlanUseCase::class, function ($app) {
+            return new ToggleActivePlanUseCase(
                 $app->make(PlanRepositoryPort::class)
             );
         });

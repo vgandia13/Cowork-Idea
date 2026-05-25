@@ -18,4 +18,8 @@ interface SubscriptionRepositoryPort
     public function findAll(int $page = 1, int $perPage = 15): array;
 
     public function countAll(): int;
+
+    public function findByUserId(string $userId): array;
+
+    public function findActiveByUserId(string $userId): ?Subscription;
 }

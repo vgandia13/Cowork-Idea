@@ -18,4 +18,10 @@ interface SpaceRepositoryPort
     public function findAll(int $page = 1, int $perPage = 15): array;
 
     public function countAll(): int;
+
+    public function findBySlug(string $slug): ?Space;
+
+    public function findByCoworkingId(string $coworkingId): array;
+
+    public function findAvailable(array $filters): array;
 }

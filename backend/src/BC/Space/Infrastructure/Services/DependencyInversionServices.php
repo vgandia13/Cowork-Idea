@@ -8,8 +8,13 @@ use Src\BC\Space\Application\UseCase\CheckSpaceExistsUseCase;
 use Src\BC\Space\Application\UseCase\CreateSpaceUseCase;
 use Src\BC\Space\Application\UseCase\DeleteSpaceUseCase;
 use Src\BC\Space\Application\UseCase\ListSpacesUseCase;
+use Src\BC\Space\Application\UseCase\ListAvailableSpacesUseCase;
+use Src\BC\Space\Application\UseCase\ListSpaceBookingsUseCase;
+use Src\BC\Space\Application\UseCase\ReadSpaceBySlugUseCase;
 use Src\BC\Space\Application\UseCase\ReadSpaceUseCase;
+use Src\BC\Space\Application\UseCase\ToggleStatusSpaceUseCase;
 use Src\BC\Space\Application\UseCase\UpdateSpaceUseCase;
+use Src\BC\Booking\Application\Port\BookingRepositoryPort;
 use Src\BC\Space\Infrastructure\Repositories\EloquentSpaceRepository;
 
 class DependencyInversionServices extends ServiceProvider
@@ -50,6 +55,30 @@ class DependencyInversionServices extends ServiceProvider
 
         $this->app->bind(CheckSpaceExistsUseCase::class, function ($app) {
             return new CheckSpaceExistsUseCase(
+                $app->make(SpaceRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ReadSpaceBySlugUseCase::class, function ($app) {
+            return new ReadSpaceBySlugUseCase(
+                $app->make(SpaceRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ToggleStatusSpaceUseCase::class, function ($app) {
+            return new ToggleStatusSpaceUseCase(
+                $app->make(SpaceRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ListSpaceBookingsUseCase::class, function ($app) {
+            return new ListSpaceBookingsUseCase(
+                $app->make(BookingRepositoryPort::class)
+            );
+        });
+
+        $this->app->bind(ListAvailableSpacesUseCase::class, function ($app) {
+            return new ListAvailableSpacesUseCase(
                 $app->make(SpaceRepositoryPort::class)
             );
         });
