@@ -1,13 +1,24 @@
-const Navbar = () => {
-    return (
-        <div className="flex justify-between align-middle p-4 mb-4 bg-zinc-200 dark:bg-zinc-900">
-            <h1>Logo</h1>
-            <ul className="flex">
-                <li>Home</li>
-                <li>Posts</li>
-            </ul>
-        </div>
-    )
-}
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export default Navbar
+const Navbar = () => {
+  return (
+    <nav className="flex items-center justify-between p-4 border-b bg-white">
+      <div className="text-xl font-bold text-blue-600">CoworkSpace</div>
+      <ul className="flex items-center gap-6 text-sm font-medium text-gray-600">
+        <li>
+          <Link href="/" className="hover:text-blue-600">Explorar</Link>
+        </li>
+        <li>
+          <Link href="/nosotros" className="hover:text-blue-600">Nosotros</Link>
+        </li>
+      </ul>
+      <div className="flex gap-2">
+        <Button variant="ghost">Iniciar sesión</Button>
+        <Button>Registrarse</Button>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
