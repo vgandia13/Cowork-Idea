@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface Payload {
-  username: string;
   email: string;
   password: string;
 }
@@ -37,22 +36,6 @@ const LoginPage = () => {
       </CardHeader>
       <CardContent className="space-y-6">
         <form onSubmit={handleSubmit(onsubmit)}>
-          <Field>
-            <FieldLabel className="text-text-dark">
-              Nombre de Usuario
-            </FieldLabel>
-            <Input
-              type="text"
-              placeholder="johndoe"
-              className="text-text-dark"
-              {...register("username", { required: true })}
-            />
-            {errors.username && (
-              <span className="text-red-500">
-                El nombre de usuario es requerido
-              </span>
-            )}
-          </Field>
           <Field>
             <FieldLabel className="text-text-dark">
               Correo Electrónico
