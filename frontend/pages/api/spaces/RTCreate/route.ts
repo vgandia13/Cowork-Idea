@@ -1,39 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { Space, SpaceType, SpaceStatus } from '@/types/Space';
+import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
+import { Space } from "@/types/Space";
 
-export async function POST(req: NextRequest) {
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   try {
-    const body = await req.json();
-
-    const { coworkingId, name, slug, type, description, capacity, pricePerHour, pricePerDay, pricePerMonth, size, amenities } = body as Partial<Space>;
-    
-    // Validate required fields
-    if (!coworkingId || !name || !slug || !type) {
-      return NextResponse.json({ error: 'Datos inválidos o campos requeridos faltantes' }, { status: 400 });
-    }
-
-    // Simulation of space creation (stub)
-    const newSpace: Space = { 
-        id: "550e8400-e29b-41d4-a716-446655440002",
-        coworkingId: coworkingId!,
-        name: name!,
-        slug: slug!,
-        type: type!,
-        description: description || '',
-        capacity: capacity || 0,
-        pricePerHour: pricePerHour || 0,
-        pricePerDay: pricePerDay || 0,
-        pricePerMonth: pricePerMonth || 0,
-        size: size || 0,
-        amenities: amenities || '',
-        images: [],
-        available: true,
-        status: SpaceStatus.Active
-    };
-    
-    return NextResponse.json(newSpace, { status: 201 });
-
+    const response = await axios.post<Space>(`${API_URL}/spaces`, req.body);
+    res.status(201).json(response.data);
   } catch (error) {
-    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
+    if (axios.isAxiosError(error)) {
+      return res.status(error.response?.status || 500).json({
+        error: error.response?.data?.message || "Error en la API externa",
+      });
+    }
+    if (error instanceof Error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 }

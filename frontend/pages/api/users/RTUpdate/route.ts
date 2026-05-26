@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
-import { Subscription } from "@/types/Subscription";
+import { User } from "@/types/User";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
 
@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   const { id } = req.query;
   try {
-    const response = await axios.put<Subscription>(`${API_URL}/subscriptions/${id}`, req.body);
+    const response = await axios.put<User>(`${API_URL}/users/${id}`, req.body);
     res.status(200).json(response.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {

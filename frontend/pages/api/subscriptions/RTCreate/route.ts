@@ -1,15 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { Subscription } from '@/types/Subscription';
+import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
+import { Subscription } from "@/types/Subscription";
 
-export async function POST(req: NextRequest) {
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   try {
-    const body = await req.json();
-    const sub = body as Partial<Subscription>;
-    if (!sub.userId || !sub.planId || !sub.startDate || !sub.endDate) {
-      return NextResponse.json({ error: 'Campos requeridos faltantes' }, { status: 400 });
-    }
-    return NextResponse.json({ id: "1", ...body }, { status: 201 });
+    const response = await axios.post<Subscription>(`${API_URL}/subscriptions`, req.body);
+    res.status(201).json(response.data);
   } catch (error) {
-    return NextResponse.json({ error: 'Error' }, { status: 500 });
+    if (axios.isAxiosError(error)) {
+      return res.status(error.response?.status || 500).json({
+        error: error.response?.data?.message || "Error en la API externa",
+      });
+    }
+    if (error instanceof Error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 }

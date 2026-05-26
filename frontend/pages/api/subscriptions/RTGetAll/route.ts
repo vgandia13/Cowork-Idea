@@ -8,9 +8,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { id } = req.query;
   try {
-    const response = await axios.put<Subscription>(`${API_URL}/subscriptions/${id}`, req.body);
+    const response = await axios.get<Subscription[]>(`${API_URL}/subscriptions`);
     res.status(200).json(response.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {

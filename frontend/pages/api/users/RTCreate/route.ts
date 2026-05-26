@@ -1,35 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
+import { User } from "@/types/User";
 
-export async function POST(req: NextRequest) {
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   try {
-    const body = await req.json();
-
-    // Validation
-    const { first_name, last_name, email, password_hash, role } = body;
-    
-    // Validate required fields
-    if (!first_name || !last_name || !email || !password_hash || !role) {
-      return NextResponse.json({ error: 'Datos inválidos o campos requeridos faltantes' }, { status: 400 });
-    }
-
-    // Validate role
-    const validRoles = ['admin', 'member', 'guest'];
-    if (!validRoles.includes(role)) {
-      return NextResponse.json({ error: 'Rol inválido' }, { status: 422 });
-    }
-
-    // Simulation of user creation (stub)
-    return NextResponse.json({ 
-        id: "550e8400-e29b-41d4-a716-446655440000",
-        first_name,
-        last_name,
-        email,
-        role,
-        active: true,
-        registration_date: new Date().toISOString()
-    }, { status: 201 });
-
+    const response = await axios.post<User>(`${API_URL}/users`, req.body);
+    res.status(201).json(response.data);
   } catch (error) {
-    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
+    if (axios.isAxiosError(error)) {
+      return res.status(error.response?.status || 500).json({
+        error: error.response?.data?.message || "Error en la API externa",
+      });
+    }
+    if (error instanceof Error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 }
