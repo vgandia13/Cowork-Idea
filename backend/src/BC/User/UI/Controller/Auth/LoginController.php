@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\BC\User\UI\Auth\Controller;
+namespace Src\BC\User\UI\Controller\Auth;
 
 class LoginController {
     public function __invoke(Request $request)

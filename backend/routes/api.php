@@ -52,12 +52,12 @@ use Src\BC\User\UI\Controller\ListUsersController;
 use Src\BC\User\UI\Controller\ReadUserController;
 use Src\BC\User\UI\Controller\ToggleActiveUserController;
 use Src\BC\User\UI\Controller\UpdateUserController;
+use Src\BC\User\UI\Controller\Auth\LoginController;
+use Src\BC\User\UI\Controller\Auth\LogoutController;
 
 Route::prefix('v1')->group(function () {
 
     Route::post('/auth/login',    LoginController::class);
-    Route::post('/auth/register', RegisterController::class);
-
     Route::post('/auth/logout', LogoutController::class)->middleware('auth:sanctum');
 
 
