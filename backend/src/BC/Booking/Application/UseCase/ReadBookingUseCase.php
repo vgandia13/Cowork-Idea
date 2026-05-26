@@ -8,15 +8,9 @@ use Src\BC\Booking\Domain\ValueObjects\BookingIdValueObject;
 
 class ReadBookingUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $repository) {}
 
-    public function execute(string $id): ?Booking
-    {
-        return $this->repository->findById(
-            new BookingIdValueObject($id)
-        );
+    public function execute(string $id): ?Booking {
+        return $this->repository->findById(new BookingIdValueObject($id));
     }
 }

@@ -14,7 +14,6 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('address');
             $table->string('city');
-            $table->string('country');
             $table->string('postal_code');
             $table->string('phone')->nullable();
             $table->string('email')->nullable();

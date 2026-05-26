@@ -7,13 +7,9 @@ use Src\BC\Booking\Domain\Entities\Booking;
 
 class ListUserBookingsUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $repository) {}
 
-    public function execute(string $userId): array
-    {
+    public function execute(string $userId): array{
         return $this->repository->findByUserId($userId);
     }
 }

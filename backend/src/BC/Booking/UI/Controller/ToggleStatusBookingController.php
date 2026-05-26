@@ -8,13 +8,9 @@ use Src\BC\Booking\Application\UseCase\ToggleStatusBookingUseCase;
 
 class ToggleStatusBookingController extends Controller
 {
-    public function __construct(
-        private readonly ToggleStatusBookingUseCase $useCase,
-    ) {
-    }
+    public function __construct(private readonly ToggleStatusBookingUseCase $useCase) {}
 
-    public function __invoke(string $id): JsonResponse
-    {
+    public function __invoke(string $id): JsonResponse {
         try {
             $booking = $this->useCase->execute($id);
         } catch (\RuntimeException $e) {

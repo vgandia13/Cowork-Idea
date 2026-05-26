@@ -8,13 +8,9 @@ use Src\BC\Coworking\Domain\ValueObjects\CoworkingIdValueObject;
 
 class ReadCoworkingUseCase
 {
-    public function __construct(
-        private readonly CoworkingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly CoworkingRepositoryPort $repository) {}
 
-    public function execute(string $id): ?Coworking
-    {
+    public function execute(string $id): ?Coworking {
         return $this->repository->findById(
             new CoworkingIdValueObject($id)
         );

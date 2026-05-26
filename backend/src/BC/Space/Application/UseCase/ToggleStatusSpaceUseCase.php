@@ -20,19 +20,15 @@ use Src\BC\Space\Domain\ValueObjects\SpaceStatusValueObject;
 
 class ToggleStatusSpaceUseCase
 {
-    public function __construct(
-        private readonly SpaceRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SpaceRepositoryPort $repository) {}
 
-    public function execute(string $id): Space
-    {
+    public function execute(string $id): Space {
         $existing = $this->repository->findById(
             new SpaceIdValueObject($id)
         );
 
         if (!$existing) {
-            throw new \RuntimeException("Space with id {$id} not found.");
+            throw new \RuntimeException("El espacio con el id {$id} no existe ");
         }
 
         $newStatus = $existing->getStatusValue() === 'active' ? 'inactive' : 'active';

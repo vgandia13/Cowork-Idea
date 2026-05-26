@@ -15,13 +15,9 @@ use Src\BC\Subscription\Domain\ValueObjects\SubscriptionStatusValueObject;
 
 class CreateSubscriptionUseCase
 {
-    public function __construct(
-        private readonly SubscriptionRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SubscriptionRepositoryPort $repository) {}
 
-    public function execute(SubscriptionDTO $dto): Subscription
-    {
+    public function execute(SubscriptionDTO $dto): Subscription {
         $subscription = new Subscription(
             SubscriptionIdValueObject::generate(),
             new SubscriptionUserIdValueObject($dto->userId),

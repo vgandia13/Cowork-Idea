@@ -8,25 +8,18 @@ use Illuminate\Http\Request;
 use Src\BC\User\Application\DTO\UserDTO;
 use Src\BC\User\Application\UseCase\CreateUserUseCase;
 
-class CreateUserController extends Controller
-{
-    public function __construct(
-        private readonly CreateUserUseCase $useCase,
-    ) {
-    }
+class CreateUserController extends Controller {
 
-    public function __invoke(Request $request): JsonResponse
-    {
+    public function __construct(private readonly CreateUserUseCase $useCase ) {}
+
+    public function __invoke(Request $request): JsonResponse {
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
             'phone' => 'nullable|string|max:255',
             'password_hash' => 'required|string|max:255',
-            'avatar' => 'nullable|string|max:255',
-            'company' => 'nullable|string|max:255',
             'role' => 'required|string|max:255',
-            'bio' => 'nullable|string',
             'registration_date' => 'required|date',
             'active' => 'required|boolean',
         ]);
@@ -38,10 +31,7 @@ class CreateUserController extends Controller
             email: $validated['email'],
             phone: $validated['phone'] ?? null,
             passwordHash: $validated['password_hash'],
-            avatar: $validated['avatar'] ?? null,
-            company: $validated['company'] ?? null,
             role: $validated['role'],
-            bio: $validated['bio'] ?? null,
             registrationDate: $validated['registration_date'],
             active: $validated['active'],
         );

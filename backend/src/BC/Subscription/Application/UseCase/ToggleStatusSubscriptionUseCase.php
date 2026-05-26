@@ -12,21 +12,17 @@ use Src\BC\Subscription\Domain\ValueObjects\SubscriptionEndDateValueObject;
 use Src\BC\Subscription\Domain\ValueObjects\SubscriptionAutoRenewalValueObject;
 use Src\BC\Subscription\Domain\ValueObjects\SubscriptionStatusValueObject;
 
-class ToggleStatusSubscriptionUseCase
-{
-    public function __construct(
-        private readonly SubscriptionRepositoryPort $repository,
-    ) {
-    }
+class ToggleStatusSubscriptionUseCase {
 
-    public function execute(string $id): Subscription
-    {
+    public function __construct( private readonly SubscriptionRepositoryPort $repository) {}
+
+    public function execute(string $id): Subscription {
         $existing = $this->repository->findById(
             new SubscriptionIdValueObject($id)
         );
 
         if (!$existing) {
-            throw new \RuntimeException("Subscription with id {$id} not found.");
+            throw new \RuntimeException("La suscripcion con el id {$id} no existe");
         }
 
         $newStatus = $existing->getStatusValue() === 'active' ? 'inactive' : 'active';

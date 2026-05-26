@@ -46,7 +46,7 @@ abstract class TimeValueObject
         $reconstructed = \DateTimeImmutable::createFromFormat('H:i:s', $timeOnly);
         if (!$reconstructed || $reconstructed->format('H:i:s') !== $timeOnly) {
             throw new InvalidArgumentException(
-                sprintf('<%s> does not allow the value <%s>. Expected a time format (H:i:s).', static::class, $value->format('Y-m-d H:i:s'))
+                sprintf('Se espera un formato (H:i:s).', static::class, $value->format('Y-m-d H:i:s'))
             );
         }
     }

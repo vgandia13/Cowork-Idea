@@ -41,7 +41,7 @@ class EloquentUserRepository implements UserRepositoryPort
     {
         $model = $this->findByIdFromModel($entity->getIdValue());
         if (!$model) {
-            throw new \RuntimeException("User with id {$entity->getIdValue()} not found.");
+            throw new \RuntimeException(" Usuario con el id {$entity->getIdValue()} no existe ");
         }
         $this->updateFromModel($entity, $model);
         return UserHydrator::toEntity($model->fresh());

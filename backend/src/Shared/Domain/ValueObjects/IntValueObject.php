@@ -22,7 +22,7 @@ abstract class IntValueObject
     {
         if ($value < $min) {
             throw new InvalidArgumentException(
-                sprintf('<%s> does not allow the value <%s>. Minimum is %d.', static::class, $value, $min)
+                sprintf('<%s> no permite el valor <%s>. El minimo es %d.', static::class, $value, $min)
             );
         }
     }
@@ -31,7 +31,7 @@ abstract class IntValueObject
     {
         if ($value > $max) {
             throw new InvalidArgumentException(
-                sprintf('<%s> does not allow the value <%s>. Maximum is %d.', static::class, $value, $max)
+                sprintf('<%s> no permite el valor <%s>. El maximo es %d.', static::class, $value, $max)
             );
         }
     }

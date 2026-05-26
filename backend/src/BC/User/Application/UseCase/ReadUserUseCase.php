@@ -8,13 +8,9 @@ use Src\BC\User\Domain\ValueObjects\UserIdValueObject;
 
 class ReadUserUseCase
 {
-    public function __construct(
-        private readonly UserRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly UserRepositoryPort $repository) {}
 
-    public function execute(string $id): ?User
-    {
+    public function execute(string $id): ?User {
         return $this->repository->findById(
             new UserIdValueObject($id)
         );

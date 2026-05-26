@@ -6,13 +6,9 @@ use Src\BC\Booking\Application\Port\BookingRepositoryPort;
 
 class ListBookingsUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $repository) {}
 
-    public function execute(int $page = 1, int $perPage = 15): array
-    {
+    public function execute(int $page = 1, int $perPage = 15): array  {
         $items = $this->repository->findAll($page, $perPage);
         $total = $this->repository->countAll();
 

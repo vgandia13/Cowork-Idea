@@ -10,7 +10,6 @@ use Src\BC\Coworking\Domain\ValueObjects\CoworkingNameValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingSlugValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingAddressValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingCityValueObject;
-use Src\BC\Coworking\Domain\ValueObjects\CoworkingCountryValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingPostalCodeValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingPhoneValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingEmailValueObject;
@@ -22,12 +21,9 @@ use Src\BC\Coworking\Domain\ValueObjects\CoworkingCoverValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingGalleryValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingActiveValueObject;
 
-class UpdateCoworkingUseCase
-{
-    public function __construct(
-        private readonly CoworkingRepositoryPort $repository,
-    ) {
-    }
+class UpdateCoworkingUseCase {
+
+    public function __construct(private readonly CoworkingRepositoryPort $repository) {}
 
     public function execute(CoworkingUpdateDTO $dto): Coworking
     {
@@ -36,7 +32,7 @@ class UpdateCoworkingUseCase
         );
 
         if (!$existing) {
-            throw new \RuntimeException("Coworking with id {$dto->id} not found.");
+            throw new \RuntimeException("El coworking con id {$dto->id} no existe");
         }
 
         $updated = new Coworking(
@@ -45,7 +41,6 @@ class UpdateCoworkingUseCase
             $dto->slug !== null ? new CoworkingSlugValueObject($dto->slug) : $existing->getSlug(),
             $dto->address !== null ? new CoworkingAddressValueObject($dto->address) : $existing->getAddress(),
             $dto->city !== null ? new CoworkingCityValueObject($dto->city) : $existing->getCity(),
-            $dto->country !== null ? new CoworkingCountryValueObject($dto->country) : $existing->getCountry(),
             $dto->postalCode !== null ? new CoworkingPostalCodeValueObject($dto->postalCode) : $existing->getPostalCode(),
             $dto->phone !== null ? new CoworkingPhoneValueObject($dto->phone) : $existing->getPhone(),
             $dto->email !== null ? new CoworkingEmailValueObject($dto->email) : $existing->getEmail(),

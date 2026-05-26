@@ -14,21 +14,16 @@ use Src\BC\Plan\Domain\ValueObjects\PlanMeetingHoursValueObject;
 use Src\BC\Plan\Domain\ValueObjects\PlanAccess247ValueObject;
 use Src\BC\Plan\Domain\ValueObjects\PlanActiveValueObject;
 
-class ToggleActivePlanUseCase
-{
-    public function __construct(
-        private readonly PlanRepositoryPort $repository,
-    ) {
-    }
+class ToggleActivePlanUseCase {
 
-    public function execute(string $id): Plan
-    {
-        $existing = $this->repository->findById(
-            new PlanIdValueObject($id)
-        );
+    public function __construct(private readonly PlanRepositoryPort $repository) {}
+
+    public function execute(string $id): Plan {
+
+        $existing = $this->repository->findById(new PlanIdValueObject($id));
 
         if (!$existing) {
-            throw new \RuntimeException("Plan with id {$id} not found.");
+            throw new \RuntimeException("El plan con el id {$id} no existe");
         }
 
         $updated = new Plan(

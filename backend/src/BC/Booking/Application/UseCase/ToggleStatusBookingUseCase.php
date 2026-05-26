@@ -17,20 +17,12 @@ use Src\BC\Booking\Domain\ValueObjects\BookingBookingCodeValueObject;
 
 class ToggleStatusBookingUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $repository) {}
 
-    public function execute(string $id): Booking
-    {
-        $existing = $this->repository->findById(
-            new BookingIdValueObject($id)
-        );
+    public function execute(string $id): Booking {
+        $existing = $this->repository->findById(new BookingIdValueObject($id));
 
-        if (!$existing) {
-            throw new \RuntimeException("Booking with id {$id} not found.");
-        }
+        if (!$existing) {throw new \RuntimeException("El booking con el id {$id} no existe"); }
 
         $newStatus = $existing->getStatusValue() === 'active' ? 'inactive' : 'active';
 

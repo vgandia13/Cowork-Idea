@@ -7,15 +7,9 @@ use Src\BC\Booking\Domain\ValueObjects\BookingIdValueObject;
 
 class DeleteBookingUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $repository) {}
 
-    public function execute(string $id): void
-    {
-        $this->repository->delete(
-            new BookingIdValueObject($id)
-        );
+    public function execute(string $id): void{
+        $this->repository->delete(new BookingIdValueObject($id));
     }
 }

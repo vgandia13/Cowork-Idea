@@ -7,15 +7,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Src\BC\Coworking\Application\UseCase\ListCoworkingsUseCase;
 
-class ListCoworkingsController extends Controller
-{
-    public function __construct(
-        private readonly ListCoworkingsUseCase $useCase,
-    ) {
-    }
+class ListCoworkingsController extends Controller {
 
-    public function __invoke(Request $request): JsonResponse
-    {
+    public function __construct(private readonly ListCoworkingsUseCase $useCase) {}
+
+    public function __invoke(Request $request): JsonResponse {
         $page = (int) $request->get('page', 1);
         $perPage = (int) $request->get('perPage', 15);
 

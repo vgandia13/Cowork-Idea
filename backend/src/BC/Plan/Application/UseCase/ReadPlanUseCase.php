@@ -6,12 +6,9 @@ use Src\BC\Plan\Application\Port\PlanRepositoryPort;
 use Src\BC\Plan\Domain\Entities\Plan;
 use Src\BC\Plan\Domain\ValueObjects\PlanIdValueObject;
 
-class ReadPlanUseCase
-{
-    public function __construct(
-        private readonly PlanRepositoryPort $repository,
-    ) {
-    }
+class ReadPlanUseCase {
+    
+    public function __construct(private readonly PlanRepositoryPort $repository) {}
 
     public function execute(string $id): ?Plan
     {

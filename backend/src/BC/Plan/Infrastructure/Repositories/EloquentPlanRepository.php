@@ -41,7 +41,7 @@ class EloquentPlanRepository implements PlanRepositoryPort
     {
         $model = $this->findByIdFromModel($entity->getIdValue());
         if (!$model) {
-            throw new \RuntimeException("Plan with id {$entity->getIdValue()} not found.");
+            throw new \RuntimeException("El plan con el id {$entity->getIdValue()} no existe ");
         }
         $this->updateFromModel($entity, $model);
         return PlanHydrator::toEntity($model->fresh());

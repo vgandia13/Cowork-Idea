@@ -9,7 +9,6 @@ use Src\BC\Coworking\Domain\ValueObjects\CoworkingNameValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingSlugValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingAddressValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingCityValueObject;
-use Src\BC\Coworking\Domain\ValueObjects\CoworkingCountryValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingPostalCodeValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingPhoneValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingEmailValueObject;
@@ -35,7 +34,7 @@ class ToggleActiveCoworkingUseCase
         );
 
         if (!$existing) {
-            throw new \RuntimeException("Coworking with id {$id} not found.");
+            throw new \RuntimeException("El coworking con el id {$id} no existe");
         }
 
         $updated = new Coworking(
@@ -44,7 +43,6 @@ class ToggleActiveCoworkingUseCase
             $existing->getSlug(),
             $existing->getAddress(),
             $existing->getCity(),
-            $existing->getCountry(),
             $existing->getPostalCode(),
             $existing->getPhone(),
             $existing->getEmail(),

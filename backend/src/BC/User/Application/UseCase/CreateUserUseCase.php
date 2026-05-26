@@ -11,22 +11,15 @@ use Src\BC\User\Domain\ValueObjects\UserLastNameValueObject;
 use Src\BC\User\Domain\ValueObjects\UserEmailValueObject;
 use Src\BC\User\Domain\ValueObjects\UserPhoneValueObject;
 use Src\BC\User\Domain\ValueObjects\UserPasswordHashValueObject;
-use Src\BC\User\Domain\ValueObjects\UserAvatarValueObject;
-use Src\BC\User\Domain\ValueObjects\UserCompanyValueObject;
 use Src\BC\User\Domain\ValueObjects\UserRoleValueObject;
-use Src\BC\User\Domain\ValueObjects\UserBioValueObject;
 use Src\BC\User\Domain\ValueObjects\UserRegistrationDateValueObject;
 use Src\BC\User\Domain\ValueObjects\UserActiveValueObject;
 
 class CreateUserUseCase
 {
-    public function __construct(
-        private readonly UserRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly UserRepositoryPort $repository) {}
 
-    public function execute(UserDTO $dto): User
-    {
+    public function execute(UserDTO $dto): User {
         $user = new User(
             UserIdValueObject::generate(),
             new UserFirstNameValueObject($dto->firstName),
@@ -34,10 +27,7 @@ class CreateUserUseCase
             new UserEmailValueObject($dto->email),
             $dto->phone !== null ? new UserPhoneValueObject($dto->phone) : null,
             new UserPasswordHashValueObject($dto->passwordHash),
-            $dto->avatar !== null ? new UserAvatarValueObject($dto->avatar) : null,
-            $dto->company !== null ? new UserCompanyValueObject($dto->company) : null,
             new UserRoleValueObject($dto->role),
-            $dto->bio !== null ? new UserBioValueObject($dto->bio) : null,
             new UserRegistrationDateValueObject($dto->registrationDate),
             new UserActiveValueObject($dto->active),
         );

@@ -17,19 +17,13 @@ use Src\BC\Plan\Domain\ValueObjects\PlanActiveValueObject;
 
 class UpdatePlanUseCase
 {
-    public function __construct(
-        private readonly PlanRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly PlanRepositoryPort $repository) {}
 
-    public function execute(PlanUpdateDTO $dto): Plan
-    {
-        $existing = $this->repository->findById(
-            new PlanIdValueObject($dto->id)
-        );
+    public function execute(PlanUpdateDTO $dto): Plan {
+        $existing = $this->repository->findById(new PlanIdValueObject($dto->id));
 
         if (!$existing) {
-            throw new \RuntimeException("Plan with id {$dto->id} not found.");
+            throw new \RuntimeException("El plan con el id {$dto->id} no existe");
         }
 
         $updated = new Plan(

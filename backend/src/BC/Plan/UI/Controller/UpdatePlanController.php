@@ -8,15 +8,11 @@ use Illuminate\Http\Request;
 use Src\BC\Plan\Application\DTO\PlanUpdateDTO;
 use Src\BC\Plan\Application\UseCase\UpdatePlanUseCase;
 
-class UpdatePlanController extends Controller
-{
-    public function __construct(
-        private readonly UpdatePlanUseCase $useCase,
-    ) {
-    }
+class UpdatePlanController extends Controller {
 
-    public function __invoke(string $id, Request $request): JsonResponse
-    {
+    public function __construct(private readonly UpdatePlanUseCase $useCase) {}
+
+    public function __invoke(string $id, Request $request): JsonResponse {
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'description' => 'sometimes|nullable|string',

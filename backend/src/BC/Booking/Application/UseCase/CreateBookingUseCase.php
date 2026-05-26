@@ -18,10 +18,7 @@ use Src\BC\Booking\Domain\ValueObjects\BookingBookingCodeValueObject;
 
 class CreateBookingUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $repository) {}
 
     public function execute(BookingDTO $dto): Booking
     {

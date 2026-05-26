@@ -15,10 +15,7 @@ trait CreateUserTrait
         $model->email = $entity->getEmailValue();
         $model->phone = $entity->getPhoneValue();
         $model->password_hash = $entity->getPasswordHashValue();
-        $model->avatar = $entity->getAvatarValue();
-        $model->company = $entity->getCompanyValue();
         $model->role = $entity->getRoleValue();
-        $model->bio = $entity->getBioValue();
         $model->registration_date = $entity->getRegistrationDateValue();
         $model->active = $entity->getActiveValue();
         $model->save();

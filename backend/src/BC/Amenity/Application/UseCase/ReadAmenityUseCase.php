@@ -8,15 +8,9 @@ use Src\BC\Amenity\Domain\ValueObjects\AmenityIdValueObject;
 
 class ReadAmenityUseCase
 {
-    public function __construct(
-        private readonly AmenityRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly AmenityRepositoryPort $repository) {}
 
-    public function execute(string $id): ?Amenity
-    {
-        return $this->repository->findById(
-            new AmenityIdValueObject($id)
-        );
+    public function execute(string $id): ?Amenity{
+        return $this->repository->findById(new AmenityIdValueObject($id));
     }
 }

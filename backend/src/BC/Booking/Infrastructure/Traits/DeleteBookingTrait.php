@@ -6,8 +6,7 @@ use Src\BC\Booking\Infrastructure\Models\BookingModel;
 
 trait DeleteBookingTrait
 {
-    public function deleteFromModel(string $id): void
-    {
+    public function deleteFromModel(string $id): void {
         BookingModel::destroy($id);
     }
 }

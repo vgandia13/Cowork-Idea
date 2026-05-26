@@ -21,13 +21,9 @@ use Src\BC\Space\Domain\ValueObjects\SpaceStatusValueObject;
 
 class CreateSpaceUseCase
 {
-    public function __construct(
-        private readonly SpaceRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SpaceRepositoryPort $repository) {}
 
-    public function execute(SpaceDTO $dto): Space
-    {
+    public function execute(SpaceDTO $dto): Space {
         $space = new Space(
             SpaceIdValueObject::generate(),
             new SpaceCoworkingIdValueObject($dto->coworkingId),

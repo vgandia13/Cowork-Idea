@@ -8,7 +8,6 @@ use Src\BC\Coworking\Domain\ValueObjects\CoworkingNameValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingSlugValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingAddressValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingCityValueObject;
-use Src\BC\Coworking\Domain\ValueObjects\CoworkingCountryValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingPostalCodeValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingPhoneValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingEmailValueObject;
@@ -31,7 +30,6 @@ class CoworkingHydrator
             new CoworkingSlugValueObject($model->slug),
             new CoworkingAddressValueObject($model->address),
             new CoworkingCityValueObject($model->city),
-            new CoworkingCountryValueObject($model->country),
             new CoworkingPostalCodeValueObject($model->postal_code),
             $model->phone ? new CoworkingPhoneValueObject($model->phone) : null,
             $model->email ? new CoworkingEmailValueObject($model->email) : null,

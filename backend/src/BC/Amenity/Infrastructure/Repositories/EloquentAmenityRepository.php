@@ -41,7 +41,7 @@ class EloquentAmenityRepository implements AmenityRepositoryPort
     {
         $model = $this->findByIdFromModel($entity->getIdValue());
         if (!$model) {
-            throw new \RuntimeException("Amenity with id {$entity->getIdValue()} not found.");
+            throw new \RuntimeException("El amenity con el id {$entity->getIdValue()} no se ha encontrado");
         }
         $this->updateFromModel($entity, $model);
         return AmenityHydrator::toEntity($model->fresh());

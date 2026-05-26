@@ -8,15 +8,11 @@ use Illuminate\Http\Request;
 use Src\BC\Plan\Application\DTO\PlanDTO;
 use Src\BC\Plan\Application\UseCase\CreatePlanUseCase;
 
-class CreatePlanController extends Controller
-{
-    public function __construct(
-        private readonly CreatePlanUseCase $useCase,
-    ) {
-    }
+class CreatePlanController extends Controller {
 
-    public function __invoke(Request $request): JsonResponse
-    {
+    public function __construct(private readonly CreatePlanUseCase $useCase) {}
+
+    public function __invoke(Request $request): JsonResponse {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',

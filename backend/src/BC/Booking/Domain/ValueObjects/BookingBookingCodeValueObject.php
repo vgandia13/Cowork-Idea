@@ -4,6 +4,4 @@ namespace Src\BC\Booking\Domain\ValueObjects;
 
 use Src\Shared\Domain\ValueObjects\StringValueObject;
 
-class BookingBookingCodeValueObject extends StringValueObject
-{
-}
+class BookingBookingCodeValueObject extends StringValueObject {}

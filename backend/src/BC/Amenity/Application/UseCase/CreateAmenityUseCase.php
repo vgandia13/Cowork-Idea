@@ -12,19 +12,11 @@ use Src\BC\Amenity\Domain\ValueObjects\AmenityDescriptionValueObject;
 
 class CreateAmenityUseCase
 {
-    public function __construct(
-        private readonly AmenityRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly AmenityRepositoryPort $repository) {}
 
-    public function execute(AmenityDTO $dto): Amenity
-    {
-        $amenity = new Amenity(
-            AmenityIdValueObject::generate(),
-            new AmenityNameValueObject($dto->name),
-            $dto->icon !== null ? new AmenityIconValueObject($dto->icon) : null,
-            $dto->description !== null ? new AmenityDescriptionValueObject($dto->description) : null,
-        );
+    public function execute(AmenityDTO $dto): Amenity {
+        $amenity = new Amenity(AmenityIdValueObject::generate(),new AmenityNameValueObject($dto->name),$dto->icon !== null ? new AmenityIconValueObject($dto->icon) : null,
+            $dto->description !== null ? new AmenityDescriptionValueObject($dto->description) : null);
 
         return $this->repository->create($amenity);
     }

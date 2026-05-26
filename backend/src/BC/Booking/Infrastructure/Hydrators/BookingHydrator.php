@@ -17,8 +17,7 @@ use Src\BC\Booking\Infrastructure\Models\BookingModel;
 
 class BookingHydrator
 {
-    public static function toEntity(BookingModel $model): Booking
-    {
+    public static function toEntity(BookingModel $model): Booking {
         return new Booking(
             new BookingIdValueObject($model->id),
             new BookingUserIdValueObject($model->user_id),
@@ -33,8 +32,7 @@ class BookingHydrator
         );
     }
 
-    public static function toEntityFromPaginator(\Illuminate\Support\Collection $items): array
-    {
+    public static function toEntityFromPaginator(\Illuminate\Support\Collection $items): array {
         return $items->map(fn (BookingModel $model) => self::toEntity($model))->toArray();
     }
 }

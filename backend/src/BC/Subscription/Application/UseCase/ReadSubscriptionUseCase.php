@@ -8,13 +8,9 @@ use Src\BC\Subscription\Domain\ValueObjects\SubscriptionIdValueObject;
 
 class ReadSubscriptionUseCase
 {
-    public function __construct(
-        private readonly SubscriptionRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SubscriptionRepositoryPort $repository) {}
 
-    public function execute(string $id): ?Subscription
-    {
+    public function execute(string $id): ?Subscription {
         return $this->repository->findById(
             new SubscriptionIdValueObject($id)
         );

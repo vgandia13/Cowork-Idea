@@ -8,10 +8,7 @@ use Src\BC\Amenity\Application\UseCase\ReadAmenityUseCase;
 
 class ReadAmenityController extends Controller
 {
-    public function __construct(
-        private readonly ReadAmenityUseCase $useCase,
-    ) {
-    }
+    public function __construct(private readonly ReadAmenityUseCase $useCase) {}
 
     public function __invoke(string $id): JsonResponse
     {
@@ -20,7 +17,7 @@ class ReadAmenityController extends Controller
         if (!$amenity) {
             return response()->json([
                 'status' => 'error',
-                'error' => "Amenity with id {$id} not found.",
+                'error' => "El amenity con el id {$id} no se ha encontrado",
             ], 404);
         }
 

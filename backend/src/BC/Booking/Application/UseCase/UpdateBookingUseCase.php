@@ -18,19 +18,13 @@ use Src\BC\Booking\Domain\ValueObjects\BookingBookingCodeValueObject;
 
 class UpdateBookingUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $repository) {}
 
-    public function execute(BookingUpdateDTO $dto): Booking
-    {
-        $existing = $this->repository->findById(
-            new BookingIdValueObject($dto->id)
-        );
+    public function execute(BookingUpdateDTO $dto): Booking {
+        $existing = $this->repository->findById(new BookingIdValueObject($dto->id));
 
         if (!$existing) {
-            throw new \RuntimeException("Booking with id {$dto->id} not found.");
+            throw new \RuntimeException("El booking con el id {$dto->id} no existe");
         }
 
         $updated = new Booking(

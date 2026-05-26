@@ -12,57 +12,27 @@ class Amenity implements JsonSerializable
 {
     private AmenityIdValueObject $id;
 
-    public function __construct(
-        AmenityIdValueObject $id,
-        private AmenityNameValueObject $name,
-        private ?AmenityIconValueObject $icon,
-        private ?AmenityDescriptionValueObject $description,
-    ) {
+    public function __construct(AmenityIdValueObject $id,private AmenityNameValueObject $name,private ?AmenityIconValueObject $icon,private ?AmenityDescriptionValueObject $description) {
         $this->id = $id;
     }
 
-    public function getId(): AmenityIdValueObject
-    {
-        return $this->id;
-    }
+    public function getId(): AmenityIdValueObject{return $this->id;}
 
-    public function getIdValue(): string
-    {
-        return $this->id->value();
-    }
+    public function getIdValue(): string{return $this->id->value();}
 
-    public function getName(): AmenityNameValueObject
-    {
-        return $this->name;
-    }
+    public function getName(): AmenityNameValueObject{return $this->name;}
 
-    public function getNameValue(): string
-    {
-        return $this->name?->value();
-    }
+    public function getNameValue(): string{return $this->name?->value();}
 
-    public function getIcon(): ?AmenityIconValueObject
-    {
-        return $this->icon;
-    }
+    public function getIcon(): ?AmenityIconValueObject{return $this->icon;}
 
-    public function getIconValue(): ?string
-    {
-        return $this->icon?->value();
-    }
+    public function getIconValue(): ?string{return $this->icon?->value();}
 
-    public function getDescription(): ?AmenityDescriptionValueObject
-    {
-        return $this->description;
-    }
+    public function getDescription(): ?AmenityDescriptionValueObject{return $this->description;}
 
-    public function getDescriptionValue(): ?string
-    {
-        return $this->description?->value();
-    }
+    public function getDescriptionValue(): ?string{return $this->description?->value();}
 
-    public function jsonSerialize(): mixed
-    {
+    public function jsonSerialize(): mixed {
         return [
             'id' => $this->getIdValue(),
             'name' => $this->getNameValue(),

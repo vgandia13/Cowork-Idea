@@ -7,15 +7,9 @@ use Src\BC\Booking\Domain\ValueObjects\BookingIdValueObject;
 
 class CheckBookingExistsUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $repository) {}
 
-    public function execute(string $id): bool
-    {
-        return $this->repository->findById(
-            new BookingIdValueObject($id)
-        ) !== null;
+    public function execute(string $id): bool{
+        return $this->repository->findById(new BookingIdValueObject($id)) !== null;
     }
 }

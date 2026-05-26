@@ -8,15 +8,11 @@ use Illuminate\Http\Request;
 use Src\BC\Space\Application\DTO\SpaceUpdateDTO;
 use Src\BC\Space\Application\UseCase\UpdateSpaceUseCase;
 
-class UpdateSpaceController extends Controller
-{
-    public function __construct(
-        private readonly UpdateSpaceUseCase $useCase,
-    ) {
-    }
+class UpdateSpaceController extends Controller {
 
-    public function __invoke(string $id, Request $request): JsonResponse
-    {
+    public function __construct(private readonly UpdateSpaceUseCase $useCase) {}
+
+    public function __invoke(string $id, Request $request): JsonResponse {
         $validated = $request->validate([
             'coworking_id' => 'sometimes|uuid',
             'name' => 'sometimes|string|max:255',

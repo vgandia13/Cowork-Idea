@@ -10,7 +10,6 @@ use Src\BC\Coworking\Domain\ValueObjects\CoworkingNameValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingSlugValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingAddressValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingCityValueObject;
-use Src\BC\Coworking\Domain\ValueObjects\CoworkingCountryValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingPostalCodeValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingPhoneValueObject;
 use Src\BC\Coworking\Domain\ValueObjects\CoworkingEmailValueObject;
@@ -37,7 +36,6 @@ class CreateCoworkingUseCase
             new CoworkingSlugValueObject($dto->slug),
             new CoworkingAddressValueObject($dto->address),
             new CoworkingCityValueObject($dto->city),
-            new CoworkingCountryValueObject($dto->country),
             new CoworkingPostalCodeValueObject($dto->postalCode),
             $dto->phone !== null ? new CoworkingPhoneValueObject($dto->phone) : null,
             $dto->email !== null ? new CoworkingEmailValueObject($dto->email) : null,

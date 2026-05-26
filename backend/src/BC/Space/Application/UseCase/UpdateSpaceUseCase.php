@@ -21,19 +21,15 @@ use Src\BC\Space\Domain\ValueObjects\SpaceStatusValueObject;
 
 class UpdateSpaceUseCase
 {
-    public function __construct(
-        private readonly SpaceRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SpaceRepositoryPort $repository) {}
 
-    public function execute(SpaceUpdateDTO $dto): Space
-    {
+    public function execute(SpaceUpdateDTO $dto): Space {
         $existing = $this->repository->findById(
             new SpaceIdValueObject($dto->id)
         );
 
         if (!$existing) {
-            throw new \RuntimeException("Space with id {$dto->id} not found.");
+            throw new \RuntimeException("El espacio con el id {$dto->id} no existe ");
         }
 
         $updated = new Space(
