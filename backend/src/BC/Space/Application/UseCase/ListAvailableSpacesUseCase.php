@@ -7,13 +7,9 @@ use Src\BC\Space\Domain\Entities\Space;
 
 class ListAvailableSpacesUseCase
 {
-    public function __construct(
-        private readonly SpaceRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SpaceRepositoryPort $repository) {}
 
-    public function execute(?string $startDate, ?string $endDate, ?string $type, ?string $coworkingId): array
-    {
+    public function execute(?string $startDate, ?string $endDate, ?string $type, ?string $coworkingId): array {
         $filters = [
             'start_date' => $startDate,
             'end_date' => $endDate,

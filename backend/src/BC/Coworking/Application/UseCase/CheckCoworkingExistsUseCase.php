@@ -7,13 +7,9 @@ use Src\BC\Coworking\Domain\ValueObjects\CoworkingIdValueObject;
 
 class CheckCoworkingExistsUseCase
 {
-    public function __construct(
-        private readonly CoworkingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly CoworkingRepositoryPort $repository) {}
 
-    public function execute(string $id): bool
-    {
+    public function execute(string $id): bool {
         return $this->repository->findById(
             new CoworkingIdValueObject($id)
         ) !== null;

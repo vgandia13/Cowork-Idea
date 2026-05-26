@@ -6,21 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Src\BC\Space\Application\UseCase\ReadSpaceUseCase;
 
-class ReadSpaceController extends Controller
-{
-    public function __construct(
-        private readonly ReadSpaceUseCase $useCase,
-    ) {
-    }
+class ReadSpaceController extends Controller {
 
-    public function __invoke(string $id): JsonResponse
-    {
+    public function __construct(private readonly ReadSpaceUseCase $useCase) {}
+
+    public function __invoke(string $id): JsonResponse {
         $space = $this->useCase->execute($id);
 
         if (!$space) {
             return response()->json([
                 'status' => 'error',
-                'error' => "Space with id {$id} not found.",
+                'error' => "El espacio con el id {$id} no existe",
             ], 404);
         }
 

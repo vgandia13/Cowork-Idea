@@ -15,15 +15,11 @@ use Src\BC\Plan\Domain\ValueObjects\PlanMeetingHoursValueObject;
 use Src\BC\Plan\Domain\ValueObjects\PlanAccess247ValueObject;
 use Src\BC\Plan\Domain\ValueObjects\PlanActiveValueObject;
 
-class CreatePlanUseCase
-{
-    public function __construct(
-        private readonly PlanRepositoryPort $repository,
-    ) {
-    }
+class CreatePlanUseCase {
+    
+    public function __construct(private readonly PlanRepositoryPort $repository) {}
 
-    public function execute(PlanDTO $dto): Plan
-    {
+    public function execute(PlanDTO $dto): Plan {
         $plan = new Plan(
             PlanIdValueObject::generate(),
             new PlanNameValueObject($dto->name),

@@ -5,8 +5,7 @@ namespace Src\BC\Amenity\Application\Port;
 use Src\BC\Amenity\Domain\Entities\Amenity;
 use Src\BC\Amenity\Domain\ValueObjects\AmenityIdValueObject;
 
-interface AmenityRepositoryPort
-{
+interface AmenityRepositoryPort {
     public function create(Amenity $entity): Amenity;
 
     public function findById(AmenityIdValueObject $id): ?Amenity;

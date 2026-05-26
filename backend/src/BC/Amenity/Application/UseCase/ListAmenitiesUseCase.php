@@ -6,13 +6,9 @@ use Src\BC\Amenity\Application\Port\AmenityRepositoryPort;
 
 class ListAmenitiesUseCase
 {
-    public function __construct(
-        private readonly AmenityRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly AmenityRepositoryPort $repository) {}
 
-    public function execute(int $page = 1, int $perPage = 15): array
-    {
+    public function execute(int $page = 1, int $perPage = 15): array {
         $items = $this->repository->findAll($page, $perPage);
         $total = $this->repository->countAll();
 

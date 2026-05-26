@@ -41,7 +41,7 @@ class EloquentSpaceRepository implements SpaceRepositoryPort
     {
         $model = $this->findByIdFromModel($entity->getIdValue());
         if (!$model) {
-            throw new \RuntimeException("Space with id {$entity->getIdValue()} not found.");
+            throw new \RuntimeException("El espacio con el id {$entity->getIdValue()} no existe ");
         }
         $this->updateFromModel($entity, $model);
         return SpaceHydrator::toEntity($model->fresh());

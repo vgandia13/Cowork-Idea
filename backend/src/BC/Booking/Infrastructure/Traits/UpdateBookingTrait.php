@@ -7,8 +7,7 @@ use Src\BC\Booking\Infrastructure\Models\BookingModel;
 
 trait UpdateBookingTrait
 {
-    public function updateFromModel(Booking $entity, BookingModel $model): void
-    {
+    public function updateFromModel(Booking $entity, BookingModel $model): void {
         $model->user_id = $entity->getUserIdValue();
         $model->space_id = $entity->getSpaceIdValue();
         $model->start_date = $entity->getStartDateValue();

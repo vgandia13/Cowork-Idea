@@ -7,10 +7,7 @@ use Src\BC\Coworking\Domain\Entities\Coworking;
 
 class ReadCoworkingBySlugUseCase
 {
-    public function __construct(
-        private readonly CoworkingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly CoworkingRepositoryPort $repository) {}
 
     public function execute(string $slug): ?Coworking
     {

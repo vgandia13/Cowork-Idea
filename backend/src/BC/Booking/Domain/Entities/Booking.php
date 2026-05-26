@@ -33,105 +33,35 @@ class Booking implements JsonSerializable
         $this->id = $id;
     }
 
-    public function getId(): BookingIdValueObject
-    {
-        return $this->id;
-    }
+    public function getId(): BookingIdValueObject { return $this->id; }
+    public function getIdValue(): string { return $this->id->value(); }
 
-    public function getIdValue(): string
-    {
-        return $this->id->value();
-    }
+    public function getUserId(): BookingUserIdValueObject { return $this->userId; }
+    public function getUserIdValue(): string { return $this->userId?->value(); }
 
-    public function getUserId(): BookingUserIdValueObject
-    {
-        return $this->userId;
-    }
+    public function getSpaceId(): BookingSpaceIdValueObject { return $this->spaceId; }
+    public function getSpaceIdValue(): string { return $this->spaceId?->value(); }
 
-    public function getUserIdValue(): string
-    {
-        return $this->userId?->value();
-    }
+    public function getStartDate(): BookingStartDateValueObject { return $this->startDate; }
+    public function getStartDateValue(): string { return $this->startDate?->value(); }
 
-    public function getSpaceId(): BookingSpaceIdValueObject
-    {
-        return $this->spaceId;
-    }
+    public function getEndDate(): BookingEndDateValueObject { return $this->endDate; }
+    public function getEndDateValue(): string { return $this->endDate?->value(); }
 
-    public function getSpaceIdValue(): string
-    {
-        return $this->spaceId?->value();
-    }
+    public function getCreatedAt(): BookingCreatedAtValueObject { return $this->createdAt; }
+    public function getCreatedAtValue(): string { return $this->createdAt?->value(); }
 
-    public function getStartDate(): BookingStartDateValueObject
-    {
-        return $this->startDate;
-    }
+    public function getTotal(): BookingTotalValueObject { return $this->total; }
+    public function getTotalValue(): float { return $this->total?->value(); }
 
-    public function getStartDateValue(): string
-    {
-        return $this->startDate?->value();
-    }
+    public function getStatus(): BookingStatusValueObject { return $this->status; }
+    public function getStatusValue(): string { return $this->status?->value(); }
 
-    public function getEndDate(): BookingEndDateValueObject
-    {
-        return $this->endDate;
-    }
+    public function getNotes(): ?BookingNotesValueObject { return $this->notes; }
+    public function getNotesValue(): ?string { return $this->notes?->value(); }
 
-    public function getEndDateValue(): string
-    {
-        return $this->endDate?->value();
-    }
-
-    public function getCreatedAt(): BookingCreatedAtValueObject
-    {
-        return $this->createdAt;
-    }
-
-    public function getCreatedAtValue(): string
-    {
-        return $this->createdAt?->value();
-    }
-
-    public function getTotal(): BookingTotalValueObject
-    {
-        return $this->total;
-    }
-
-    public function getTotalValue(): float
-    {
-        return $this->total?->value();
-    }
-
-    public function getStatus(): BookingStatusValueObject
-    {
-        return $this->status;
-    }
-
-    public function getStatusValue(): string
-    {
-        return $this->status?->value();
-    }
-
-    public function getNotes(): ?BookingNotesValueObject
-    {
-        return $this->notes;
-    }
-
-    public function getNotesValue(): ?string
-    {
-        return $this->notes?->value();
-    }
-
-    public function getBookingCode(): BookingBookingCodeValueObject
-    {
-        return $this->bookingCode;
-    }
-
-    public function getBookingCodeValue(): string
-    {
-        return $this->bookingCode?->value();
-    }
+    public function getBookingCode(): BookingBookingCodeValueObject { return $this->bookingCode; }
+    public function getBookingCodeValue(): string { return $this->bookingCode?->value(); }
 
     public function jsonSerialize(): mixed
     {

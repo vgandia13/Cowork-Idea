@@ -7,8 +7,7 @@ use Src\BC\Subscription\Infrastructure\Models\SubscriptionModel;
 
 trait CreateSubscriptionTrait
 {
-    public function createFromModel(Subscription $entity, SubscriptionModel $model): void
-    {
+    public function createFromModel(Subscription $entity, SubscriptionModel $model): void  {
         $model->id = $entity->getIdValue();
         $model->user_id = $entity->getUserIdValue();
         $model->plan_id = $entity->getPlanIdValue();

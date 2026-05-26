@@ -22,7 +22,7 @@ abstract class StringValueObject
     {
         if (mb_strlen(trim($value)) < $min) {
             throw new InvalidArgumentException(
-                sprintf('<%s> does not allow the value <%s>. Must have at least %d characters.', static::class, $value, $min)
+                sprintf('<%s> no se permite el valor <%s>. Debe tener minimo %d caracteres.', static::class, $value, $min)
             );
         }
     }
@@ -31,7 +31,7 @@ abstract class StringValueObject
     {
         if (mb_strlen(trim($value)) > $max) {
             throw new InvalidArgumentException(
-                sprintf('<%s> does not allow the value <%s>. Must have at most %d characters.', static::class, $value, $max)
+                sprintf('<%s> no se permite el valor <%s>. Debe tener minimo %d caracteres.', static::class, $value, $max)
             );
         }
     }

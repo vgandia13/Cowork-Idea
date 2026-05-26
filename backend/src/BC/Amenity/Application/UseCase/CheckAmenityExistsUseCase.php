@@ -7,15 +7,9 @@ use Src\BC\Amenity\Domain\ValueObjects\AmenityIdValueObject;
 
 class CheckAmenityExistsUseCase
 {
-    public function __construct(
-        private readonly AmenityRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly AmenityRepositoryPort $repository) {}
 
-    public function execute(string $id): bool
-    {
-        return $this->repository->findById(
-            new AmenityIdValueObject($id)
-        ) !== null;
+    public function execute(string $id): bool{
+        return $this->repository->findById(new AmenityIdValueObject($id)) !== null;
     }
 }

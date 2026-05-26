@@ -6,15 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Src\BC\User\Application\UseCase\ToggleActiveUserUseCase;
 
-class ToggleActiveUserController extends Controller
-{
-    public function __construct(
-        private readonly ToggleActiveUserUseCase $useCase,
-    ) {
-    }
+class ToggleActiveUserController extends Controller {
+    
+    public function __construct(private readonly ToggleActiveUserUseCase $useCase) {}
 
-    public function __invoke(string $id): JsonResponse
-    {
+    public function __invoke(string $id): JsonResponse {
         try {
             $user = $this->useCase->execute($id);
         } catch (\RuntimeException $e) {

@@ -8,10 +8,7 @@ use Src\BC\Amenity\Application\UseCase\DeleteAmenityUseCase;
 
 class DeleteAmenityController extends Controller
 {
-    public function __construct(
-        private readonly DeleteAmenityUseCase $useCase,
-    ) {
-    }
+    public function __construct(private readonly DeleteAmenityUseCase $useCase) {}
 
     public function __invoke(string $id): JsonResponse
     {

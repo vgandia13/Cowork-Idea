@@ -7,15 +7,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Src\BC\User\Application\UseCase\ListUsersUseCase;
 
-class ListUsersController extends Controller
-{
-    public function __construct(
-        private readonly ListUsersUseCase $useCase,
-    ) {
-    }
+class ListUsersController extends Controller {
+     
+    public function __construct(private readonly ListUsersUseCase $useCase) {}
 
-    public function __invoke(Request $request): JsonResponse
-    {
+    public function __invoke(Request $request): JsonResponse{
         $page = (int) $request->get('page', 1);
         $perPage = (int) $request->get('perPage', 15);
 

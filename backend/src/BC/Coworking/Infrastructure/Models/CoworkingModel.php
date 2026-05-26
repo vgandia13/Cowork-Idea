@@ -18,7 +18,6 @@ class CoworkingModel extends Model
         'slug',
         'address',
         'city',
-        'country',
         'postal_code',
         'phone',
         'email',

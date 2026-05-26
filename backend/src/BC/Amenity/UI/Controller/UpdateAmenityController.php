@@ -10,10 +10,7 @@ use Src\BC\Amenity\Application\UseCase\UpdateAmenityUseCase;
 
 class UpdateAmenityController extends Controller
 {
-    public function __construct(
-        private readonly UpdateAmenityUseCase $useCase,
-    ) {
-    }
+    public function __construct(private readonly UpdateAmenityUseCase $useCase) {}
 
     public function __invoke(string $id, Request $request): JsonResponse
     {

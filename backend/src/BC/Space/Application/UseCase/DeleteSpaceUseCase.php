@@ -7,13 +7,9 @@ use Src\BC\Space\Domain\ValueObjects\SpaceIdValueObject;
 
 class DeleteSpaceUseCase
 {
-    public function __construct(
-        private readonly SpaceRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SpaceRepositoryPort $repository) {}
 
-    public function execute(string $id): void
-    {
+    public function execute(string $id): void {
         $this->repository->delete(
             new SpaceIdValueObject($id)
         );

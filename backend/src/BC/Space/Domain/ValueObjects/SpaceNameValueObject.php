@@ -4,6 +4,4 @@ namespace Src\BC\Space\Domain\ValueObjects;
 
 use Src\Shared\Domain\ValueObjects\StringValueObject;
 
-class SpaceNameValueObject extends StringValueObject
-{
-}
+class SpaceNameValueObject extends StringValueObject {}

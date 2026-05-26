@@ -15,19 +15,15 @@ use Src\BC\Subscription\Domain\ValueObjects\SubscriptionStatusValueObject;
 
 class UpdateSubscriptionUseCase
 {
-    public function __construct(
-        private readonly SubscriptionRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SubscriptionRepositoryPort $repository) {}
 
-    public function execute(SubscriptionUpdateDTO $dto): Subscription
-    {
+    public function execute(SubscriptionUpdateDTO $dto): Subscription {
         $existing = $this->repository->findById(
             new SubscriptionIdValueObject($dto->id)
         );
 
         if (!$existing) {
-            throw new \RuntimeException("Subscription with id {$dto->id} not found.");
+            throw new \RuntimeException("La suscripcion con el id {$dto->id} no existe ");
         }
 
         $updated = new Subscription(

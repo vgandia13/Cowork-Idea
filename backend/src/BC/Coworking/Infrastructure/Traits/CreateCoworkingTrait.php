@@ -14,7 +14,6 @@ trait CreateCoworkingTrait
         $model->slug = $entity->getSlugValue();
         $model->address = $entity->getAddressValue();
         $model->city = $entity->getCityValue();
-        $model->country = $entity->getCountryValue();
         $model->postal_code = $entity->getPostalCodeValue();
         $model->phone = $entity->getPhoneValue();
         $model->email = $entity->getEmailValue();

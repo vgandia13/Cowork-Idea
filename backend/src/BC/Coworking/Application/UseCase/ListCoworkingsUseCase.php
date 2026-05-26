@@ -6,10 +6,7 @@ use Src\BC\Coworking\Application\Port\CoworkingRepositoryPort;
 
 class ListCoworkingsUseCase
 {
-    public function __construct(
-        private readonly CoworkingRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly CoworkingRepositoryPort $repository) {}
 
     public function execute(int $page = 1, int $perPage = 15): array
     {

@@ -6,8 +6,7 @@ use Src\BC\Booking\Infrastructure\Models\BookingModel;
 
 trait ReadBookingTrait
 {
-    public function findByIdFromModel(string $id): ?BookingModel
-    {
+    public function findByIdFromModel(string $id): ?BookingModel {
         return BookingModel::find($id);
     }
 }

@@ -27,78 +27,28 @@ class Subscription implements JsonSerializable
         $this->id = $id;
     }
 
-    public function getId(): SubscriptionIdValueObject
-    {
-        return $this->id;
-    }
+    public function getId(): SubscriptionIdValueObject { return $this->id;}
+    public function getIdValue(): string { return $this->id->value(); }
 
-    public function getIdValue(): string
-    {
-        return $this->id->value();
-    }
+    public function getUserId(): SubscriptionUserIdValueObject { return $this->userId; }
+    public function getUserIdValue(): string { return $this->userId?->value(); }
 
-    public function getUserId(): SubscriptionUserIdValueObject
-    {
-        return $this->userId;
-    }
+    public function getPlanId(): SubscriptionPlanIdValueObject { return $this->planId; }
+    public function getPlanIdValue(): string { return $this->planId?->value(); }
 
-    public function getUserIdValue(): string
-    {
-        return $this->userId?->value();
-    }
+    public function getStartDate(): SubscriptionStartDateValueObject { return $this->startDate; }
+    public function getStartDateValue(): string { return $this->startDate?->value(); }
 
-    public function getPlanId(): SubscriptionPlanIdValueObject
-    {
-        return $this->planId;
-    }
+    public function getEndDate(): ?SubscriptionEndDateValueObject { return $this->endDate; }
+    public function getEndDateValue(): ?string { return $this->endDate?->value(); }
 
-    public function getPlanIdValue(): string
-    {
-        return $this->planId?->value();
-    }
+    public function getAutoRenewal(): SubscriptionAutoRenewalValueObject { return $this->autoRenewal; }
+    public function getAutoRenewalValue(): bool { return $this->autoRenewal?->value(); }
 
-    public function getStartDate(): SubscriptionStartDateValueObject
-    {
-        return $this->startDate;
-    }
+    public function getStatus(): SubscriptionStatusValueObject { return $this->status; }
+    public function getStatusValue(): string { return $this->status?->value(); }
 
-    public function getStartDateValue(): string
-    {
-        return $this->startDate?->value();
-    }
-
-    public function getEndDate(): ?SubscriptionEndDateValueObject
-    {
-        return $this->endDate;
-    }
-
-    public function getEndDateValue(): ?string
-    {
-        return $this->endDate?->value();
-    }
-
-    public function getAutoRenewal(): SubscriptionAutoRenewalValueObject
-    {
-        return $this->autoRenewal;
-    }
-
-    public function getAutoRenewalValue(): bool
-    {
-        return $this->autoRenewal?->value();
-    }
-
-    public function getStatus(): SubscriptionStatusValueObject
-    {
-        return $this->status;
-    }
-
-    public function getStatusValue(): string
-    {
-        return $this->status?->value();
-    }
-
-    public function jsonSerialize(): mixed
-    {
+    public function jsonSerialize(): mixed {
         return [
             'id' => $this->getIdValue(),
             'user_id' => $this->getUserIdValue(),

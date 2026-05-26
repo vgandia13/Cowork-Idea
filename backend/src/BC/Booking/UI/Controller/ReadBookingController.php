@@ -6,15 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Src\BC\Booking\Application\UseCase\ReadBookingUseCase;
 
-class ReadBookingController extends Controller
-{
-    public function __construct(
-        private readonly ReadBookingUseCase $useCase,
-    ) {
-    }
+class ReadBookingController extends Controller {
 
-    public function __invoke(string $id): JsonResponse
-    {
+    public function __construct(private readonly ReadBookingUseCase $useCase) {}
+
+    public function __invoke(string $id): JsonResponse {
         $booking = $this->useCase->execute($id);
 
         if (!$booking) {

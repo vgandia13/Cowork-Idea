@@ -7,13 +7,9 @@ use Src\BC\Space\Domain\Entities\Space;
 
 class ListCoworkingSpacesUseCase
 {
-    public function __construct(
-        private readonly SpaceRepositoryPort $spaceRepository,
-    ) {
-    }
+    public function __construct(private readonly SpaceRepositoryPort $spaceRepository) {}
 
-    public function execute(string $coworkingId): array
-    {
+    public function execute(string $coworkingId): array {
         return $this->spaceRepository->findByCoworkingId($coworkingId);
     }
 }

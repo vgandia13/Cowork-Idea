@@ -8,21 +8,16 @@ use Illuminate\Http\Request;
 use Src\BC\Coworking\Application\DTO\CoworkingUpdateDTO;
 use Src\BC\Coworking\Application\UseCase\UpdateCoworkingUseCase;
 
-class UpdateCoworkingController extends Controller
-{
-    public function __construct(
-        private readonly UpdateCoworkingUseCase $useCase,
-    ) {
-    }
+class UpdateCoworkingController extends Controller {
 
-    public function __invoke(string $id, Request $request): JsonResponse
-    {
+    public function __construct(private readonly UpdateCoworkingUseCase $useCase) {}
+
+    public function __invoke(string $id, Request $request): JsonResponse {
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'slug' => 'sometimes|string|max:255',
             'address' => 'sometimes|string|max:255',
             'city' => 'sometimes|string|max:255',
-            'country' => 'sometimes|string|max:255',
             'postal_code' => 'sometimes|string|max:255',
             'phone' => 'sometimes|nullable|string|max:255',
             'email' => 'sometimes|nullable|string|max:255',
@@ -41,7 +36,6 @@ class UpdateCoworkingController extends Controller
             slug: $validated['slug'] ?? null,
             address: $validated['address'] ?? null,
             city: $validated['city'] ?? null,
-            country: $validated['country'] ?? null,
             postalCode: $validated['postal_code'] ?? null,
             phone: $validated['phone'] ?? null,
             email: $validated['email'] ?? null,

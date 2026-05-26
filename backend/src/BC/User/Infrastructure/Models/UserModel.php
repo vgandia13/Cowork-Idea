@@ -19,10 +19,7 @@ class UserModel extends Model
         'email',
         'phone',
         'password_hash',
-        'avatar',
-        'company',
         'role',
-        'bio',
         'registration_date',
         'active',
     ];

@@ -8,15 +8,12 @@ use Illuminate\Http\Request;
 use Src\BC\Booking\Application\DTO\BookingUpdateDTO;
 use Src\BC\Booking\Application\UseCase\UpdateBookingUseCase;
 
-class UpdateBookingController extends Controller
-{
-    public function __construct(
-        private readonly UpdateBookingUseCase $useCase,
-    ) {
+class UpdateBookingController extends Controller{
+
+    public function __construct(private readonly UpdateBookingUseCase $useCase) {
     }
 
-    public function __invoke(string $id, Request $request): JsonResponse
-    {
+    public function __invoke(string $id, Request $request): JsonResponse {
         $validated = $request->validate([
             'user_id' => 'sometimes|uuid',
             'space_id' => 'sometimes|uuid',

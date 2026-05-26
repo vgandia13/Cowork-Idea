@@ -31,98 +31,34 @@ class Plan implements JsonSerializable
         $this->id = $id;
     }
 
-    public function getId(): PlanIdValueObject
-    {
-        return $this->id;
-    }
+    public function getId(): PlanIdValueObject { return $this->id; }
+    public function getIdValue(): string { return $this->id->value(); }
 
-    public function getIdValue(): string
-    {
-        return $this->id->value();
-    }
+    public function getName(): PlanNameValueObject { return $this->name; }
+    public function getNameValue(): string { return $this->name?->value(); }
 
-    public function getName(): PlanNameValueObject
-    {
-        return $this->name;
-    }
+    public function getDescription(): ?PlanDescriptionValueObject { return $this->description; }
+    public function getDescriptionValue(): ?string { return $this->description?->value(); }
 
-    public function getNameValue(): string
-    {
-        return $this->name?->value();
-    }
+    public function getPrice(): PlanPriceValueObject { return $this->price; }
+    public function getPriceValue(): float { return $this->price?->value(); }
 
-    public function getDescription(): ?PlanDescriptionValueObject
-    {
-        return $this->description;
-    }
+    public function getDuration(): PlanDurationValueObject { return $this->duration; }
+    public function getDurationValue(): string { return $this->duration?->value(); }
 
-    public function getDescriptionValue(): ?string
-    {
-        return $this->description?->value();
-    }
+    public function getCredits(): PlanCreditsValueObject { return $this->credits; }
+    public function getCreditsValue(): int { return $this->credits?->value(); }
 
-    public function getPrice(): PlanPriceValueObject
-    {
-        return $this->price;
-    }
+    public function getMeetingHours(): PlanMeetingHoursValueObject {return $this->meetingHours; }
+    public function getMeetingHoursValue(): int { return $this->meetingHours?->value(); }
 
-    public function getPriceValue(): float
-    {
-        return $this->price?->value();
-    }
+    public function getAccess247(): PlanAccess247ValueObject { return $this->access247; }
+    public function getAccess247Value(): bool { return $this->access247?->value(); }
 
-    public function getDuration(): PlanDurationValueObject
-    {
-        return $this->duration;
-    }
+    public function getActive(): PlanActiveValueObject { return $this->active; }
+    public function getActiveValue(): bool { return $this->active?->value(); }
 
-    public function getDurationValue(): string
-    {
-        return $this->duration?->value();
-    }
-
-    public function getCredits(): PlanCreditsValueObject
-    {
-        return $this->credits;
-    }
-
-    public function getCreditsValue(): int
-    {
-        return $this->credits?->value();
-    }
-
-    public function getMeetingHours(): PlanMeetingHoursValueObject
-    {
-        return $this->meetingHours;
-    }
-
-    public function getMeetingHoursValue(): int
-    {
-        return $this->meetingHours?->value();
-    }
-
-    public function getAccess247(): PlanAccess247ValueObject
-    {
-        return $this->access247;
-    }
-
-    public function getAccess247Value(): bool
-    {
-        return $this->access247?->value();
-    }
-
-    public function getActive(): PlanActiveValueObject
-    {
-        return $this->active;
-    }
-
-    public function getActiveValue(): bool
-    {
-        return $this->active?->value();
-    }
-
-    public function jsonSerialize(): mixed
-    {
+    public function jsonSerialize(): mixed  {
         return [
             'id' => $this->getIdValue(),
             'name' => $this->getNameValue(),

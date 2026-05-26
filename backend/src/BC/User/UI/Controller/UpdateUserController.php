@@ -8,25 +8,18 @@ use Illuminate\Http\Request;
 use Src\BC\User\Application\DTO\UserUpdateDTO;
 use Src\BC\User\Application\UseCase\UpdateUserUseCase;
 
-class UpdateUserController extends Controller
-{
-    public function __construct(
-        private readonly UpdateUserUseCase $useCase,
-    ) {
-    }
+class UpdateUserController extends Controller {
 
-    public function __invoke(string $id, Request $request): JsonResponse
-    {
+    public function __construct(private readonly UpdateUserUseCase $useCase) {}
+
+    public function __invoke(string $id, Request $request): JsonResponse {
         $validated = $request->validate([
             'first_name' => 'sometimes|string|max:255',
             'last_name' => 'sometimes|string|max:255',
             'email' => 'sometimes|string|max:255',
             'phone' => 'sometimes|nullable|string|max:255',
             'password_hash' => 'sometimes|string|max:255',
-            'avatar' => 'sometimes|nullable|string|max:255',
-            'company' => 'sometimes|nullable|string|max:255',
             'role' => 'sometimes|string|max:255',
-            'bio' => 'sometimes|nullable|string',
             'registration_date' => 'sometimes|date',
             'active' => 'sometimes|boolean',
         ]);
@@ -38,10 +31,8 @@ class UpdateUserController extends Controller
             email: $validated['email'] ?? null,
             phone: $validated['phone'] ?? null,
             passwordHash: $validated['password_hash'] ?? null,
-            avatar: $validated['avatar'] ?? null,
-            company: $validated['company'] ?? null,
+
             role: $validated['role'] ?? null,
-            bio: $validated['bio'] ?? null,
             registrationDate: $validated['registration_date'] ?? null,
             active: $validated['active'] ?? null,
         );

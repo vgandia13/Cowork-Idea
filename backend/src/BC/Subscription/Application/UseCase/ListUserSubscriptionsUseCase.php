@@ -7,13 +7,9 @@ use Src\BC\Subscription\Domain\Entities\Subscription;
 
 class ListUserSubscriptionsUseCase
 {
-    public function __construct(
-        private readonly SubscriptionRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly SubscriptionRepositoryPort $repository) {}
 
-    public function execute(string $userId): array
-    {
+    public function execute(string $userId): array {
         return $this->repository->findByUserId($userId);
     }
 }

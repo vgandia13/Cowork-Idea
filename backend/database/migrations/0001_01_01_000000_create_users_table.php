@@ -15,10 +15,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('password_hash');
-            $table->string('avatar')->nullable();
-            $table->string('company')->nullable();
             $table->string('role');
-            $table->text('bio')->nullable();
             $table->dateTime('registration_date');
             $table->boolean('active')->default(true);
             $table->timestamps();

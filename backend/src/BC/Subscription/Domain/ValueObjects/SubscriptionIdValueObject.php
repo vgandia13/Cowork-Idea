@@ -4,6 +4,4 @@ namespace Src\BC\Subscription\Domain\ValueObjects;
 
 use Src\Shared\Domain\ValueObjects\UuidValueObject;
 
-class SubscriptionIdValueObject extends UuidValueObject
-{
-}
+class SubscriptionIdValueObject extends UuidValueObject {}

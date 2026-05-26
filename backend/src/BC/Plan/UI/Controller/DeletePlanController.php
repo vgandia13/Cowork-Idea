@@ -6,15 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Src\BC\Plan\Application\UseCase\DeletePlanUseCase;
 
-class DeletePlanController extends Controller
-{
-    public function __construct(
-        private readonly DeletePlanUseCase $useCase,
-    ) {
-    }
+class DeletePlanController extends Controller {
+    
+    public function __construct(private readonly DeletePlanUseCase $useCase) {}
 
-    public function __invoke(string $id): JsonResponse
-    {
+    public function __invoke(string $id): JsonResponse {
         $this->useCase->execute($id);
 
         return response()->json([

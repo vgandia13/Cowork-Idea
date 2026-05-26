@@ -7,8 +7,7 @@ use Src\BC\Booking\Infrastructure\Models\BookingModel;
 
 trait CreateBookingTrait
 {
-    public function createFromModel(Booking $entity, BookingModel $model): void
-    {
+    public function createFromModel(Booking $entity, BookingModel $model): void  {
         $model->id = $entity->getIdValue();
         $model->user_id = $entity->getUserIdValue();
         $model->space_id = $entity->getSpaceIdValue();

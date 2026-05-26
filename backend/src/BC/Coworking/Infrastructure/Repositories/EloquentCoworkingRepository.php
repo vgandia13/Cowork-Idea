@@ -41,7 +41,7 @@ class EloquentCoworkingRepository implements CoworkingRepositoryPort
     {
         $model = $this->findByIdFromModel($entity->getIdValue());
         if (!$model) {
-            throw new \RuntimeException("Coworking with id {$entity->getIdValue()} not found.");
+            throw new \RuntimeException("El coworking con el id {$entity->getIdValue()} no existe");
         }
         $this->updateFromModel($entity, $model);
         return CoworkingHydrator::toEntity($model->fresh());

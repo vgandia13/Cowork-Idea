@@ -12,27 +12,18 @@ use Src\BC\Amenity\Domain\ValueObjects\AmenityDescriptionValueObject;
 
 class UpdateAmenityUseCase
 {
-    public function __construct(
-        private readonly AmenityRepositoryPort $repository,
-    ) {
-    }
+    public function __construct(private readonly AmenityRepositoryPort $repository) {}
 
-    public function execute(AmenityUpdateDTO $dto): Amenity
-    {
-        $existing = $this->repository->findById(
-            new AmenityIdValueObject($dto->id)
-        );
+    public function execute(AmenityUpdateDTO $dto): Amenity{
+        $existing = $this->repository->findById(new AmenityIdValueObject($dto->id));
 
         if (!$existing) {
-            throw new \RuntimeException("Amenity with id {$dto->id} not found.");
+            throw new \RuntimeException("El amenity con el id {$dto->id} no se ha encontrado");
         }
 
-        $updated = new Amenity(
-            new AmenityIdValueObject($dto->id),
-            $dto->name !== null ? new AmenityNameValueObject($dto->name) : $existing->getName(),
+        $updated = new Amenity(new AmenityIdValueObject($dto->id),$dto->name !== null ? new AmenityNameValueObject($dto->name) : $existing->getName(),
             $dto->icon !== null ? new AmenityIconValueObject($dto->icon) : $existing->getIcon(),
-            $dto->description !== null ? new AmenityDescriptionValueObject($dto->description) : $existing->getDescription(),
-        );
+            $dto->description !== null ? new AmenityDescriptionValueObject($dto->description) : $existing->getDescription());
 
         return $this->repository->update($updated);
     }

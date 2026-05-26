@@ -8,15 +8,11 @@ use Illuminate\Http\Request;
 use Src\BC\Space\Application\DTO\SpaceDTO;
 use Src\BC\Space\Application\UseCase\CreateSpaceUseCase;
 
-class CreateSpaceController extends Controller
-{
-    public function __construct(
-        private readonly CreateSpaceUseCase $useCase,
-    ) {
-    }
+class CreateSpaceController extends Controller {
 
-    public function __invoke(Request $request): JsonResponse
-    {
+    public function __construct(private readonly CreateSpaceUseCase $useCase) {}
+
+    public function __invoke(Request $request): JsonResponse {
         $validated = $request->validate([
             'coworking_id' => 'required|uuid',
             'name' => 'required|string|max:255',

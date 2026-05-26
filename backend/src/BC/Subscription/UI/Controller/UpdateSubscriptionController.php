@@ -8,15 +8,11 @@ use Illuminate\Http\Request;
 use Src\BC\Subscription\Application\DTO\SubscriptionUpdateDTO;
 use Src\BC\Subscription\Application\UseCase\UpdateSubscriptionUseCase;
 
-class UpdateSubscriptionController extends Controller
-{
-    public function __construct(
-        private readonly UpdateSubscriptionUseCase $useCase,
-    ) {
-    }
+class UpdateSubscriptionController extends Controller {
 
-    public function __invoke(string $id, Request $request): JsonResponse
-    {
+    public function __construct( private readonly UpdateSubscriptionUseCase $useCase) {}
+
+    public function __invoke(string $id, Request $request): JsonResponse {
         $validated = $request->validate([
             'user_id' => 'sometimes|uuid',
             'plan_id' => 'sometimes|uuid',

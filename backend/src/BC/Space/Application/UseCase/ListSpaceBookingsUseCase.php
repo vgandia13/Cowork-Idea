@@ -7,10 +7,7 @@ use Src\BC\Booking\Domain\Entities\Booking;
 
 class ListSpaceBookingsUseCase
 {
-    public function __construct(
-        private readonly BookingRepositoryPort $bookingRepository,
-    ) {
-    }
+    public function __construct(private readonly BookingRepositoryPort $bookingRepository) {}
 
     public function execute(string $spaceId): array
     {
