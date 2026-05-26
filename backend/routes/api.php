@@ -52,8 +52,8 @@ use Src\BC\User\UI\Controller\ListUsersController;
 use Src\BC\User\UI\Controller\ReadUserController;
 use Src\BC\User\UI\Controller\ToggleActiveUserController;
 use Src\BC\User\UI\Controller\UpdateUserController;
-use Src\BC\User\UI\Auth\Controller\LoginController;
-use Src\BC\User\UI\Auth\Controller\LogoutController;
+use Src\BC\User\UI\Controller\Auth\LoginController;
+use Src\BC\User\UI\Controller\Auth\LogoutController;
 
 Route::prefix('v1')->group(function () {
 
