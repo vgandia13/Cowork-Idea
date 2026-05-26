@@ -5,10 +5,7 @@ export interface User {
     email: string;
     phone: string;
     password: string;
-    avatarUrl: string;
-    company: string;
     role: Role;
-    bio: string;
     registrationDate: Date;
     active: boolean;
 }
