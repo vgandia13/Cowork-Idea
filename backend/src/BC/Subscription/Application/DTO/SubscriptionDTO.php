@@ -11,7 +11,7 @@ class SubscriptionDTO
         public readonly string $startDate,
         public readonly ?string $endDate,
         public readonly bool $autoRenewal,
-        public readonly string $status,
+        public readonly string $status = 'pending',
     ) {
     }
 }

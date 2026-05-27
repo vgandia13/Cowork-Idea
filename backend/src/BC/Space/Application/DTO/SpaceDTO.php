@@ -9,7 +9,7 @@ class SpaceDTO
         public readonly string $coworkingId,
         public readonly string $name,
         public readonly string $slug,
-        public readonly string $type,
+        public readonly string $type = 'flex',
         public readonly ?string $description,
         public readonly int $capacity,
         public readonly ?float $priceHour,
@@ -17,7 +17,7 @@ class SpaceDTO
         public readonly ?float $priceMonth,
         public readonly ?float $sizeM2,
         public readonly bool $available,
-        public readonly string $status,
+        public readonly string $status = 'active',
     ) {
     }
 }

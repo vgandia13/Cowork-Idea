@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Src\BC\Booking\Application\DTO\BookingDTO;
 use Src\BC\Booking\Application\UseCase\CreateBookingUseCase;
+use Src\BC\Booking\Domain\Enumerations\BookingStatusEnumeration;
 
 class CreateBookingController extends Controller {
     
@@ -20,7 +21,7 @@ class CreateBookingController extends Controller {
             'end_date' => 'required|date',
             'created_at' => 'required|date',
             'total' => 'required|numeric',
-            'status' => 'required|string|max:255',
+            'status' => 'nullable|string|max:255',
             'notes' => 'nullable|string',
             'booking_code' => 'required|string|max:255',
         ]);
@@ -33,7 +34,7 @@ class CreateBookingController extends Controller {
             endDate: $validated['end_date'],
             createdAt: $validated['created_at'],
             total: $validated['total'],
-            status: $validated['status'],
+            status: $validated['status'] ?? BookingStatusEnumeration::PENDING->value,
             notes: $validated['notes'] ?? null,
             bookingCode: $validated['booking_code'],
         );

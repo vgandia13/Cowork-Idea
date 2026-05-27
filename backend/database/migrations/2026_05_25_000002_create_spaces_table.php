@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignUuid('coworking_id')->constrained('coworkings')->cascadeOnDelete();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('type');
+            $table->string('type')->default('flex');
             $table->text('description')->nullable();
             $table->integer('capacity');
             $table->float('price_hour')->nullable();

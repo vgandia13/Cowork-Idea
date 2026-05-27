@@ -12,7 +12,7 @@ class BookingDTO
         public readonly string $endDate,
         public readonly string $createdAt,
         public readonly float $total,
-        public readonly string $status,
+        public readonly string $status = 'pending',
         public readonly ?string $notes,
         public readonly string $bookingCode,
     ) {
