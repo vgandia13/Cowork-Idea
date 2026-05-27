@@ -15,7 +15,7 @@ return new class extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
             $table->boolean('auto_renewal')->default(false);
-            $table->string('status');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

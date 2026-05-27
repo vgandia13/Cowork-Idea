@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Src\BC\User\Application\DTO\UserDTO;
 use Src\BC\User\Application\UseCase\CreateUserUseCase;
+use Src\BC\User\Domain\Enumerations\UserRoleEnumeration;
 
 class CreateUserController extends Controller {
 
@@ -19,7 +20,7 @@ class CreateUserController extends Controller {
             'email' => 'required|string|max:255',
             'phone' => 'nullable|string|max:255',
             'password_hash' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
+            'role' => 'nullable|string|max:255',
             'registration_date' => 'required|date',
             'active' => 'required|boolean',
         ]);
@@ -31,7 +32,7 @@ class CreateUserController extends Controller {
             email: $validated['email'],
             phone: $validated['phone'] ?? null,
             passwordHash: $validated['password_hash'],
-            role: $validated['role'],
+            role: $validated['role'] ?? UserRoleEnumeration::MEMBER->value,
             registrationDate: $validated['registration_date'],
             active: $validated['active'],
         );

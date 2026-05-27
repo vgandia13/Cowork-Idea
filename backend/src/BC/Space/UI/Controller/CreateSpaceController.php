@@ -7,6 +7,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Src\BC\Space\Application\DTO\SpaceDTO;
 use Src\BC\Space\Application\UseCase\CreateSpaceUseCase;
+use Src\BC\Space\Domain\Enumerations\SpaceStatusEnumeration;
+use Src\BC\Space\Domain\Enumerations\SpaceTypeEnumeration;
 
 class CreateSpaceController extends Controller {
 
@@ -17,7 +19,7 @@ class CreateSpaceController extends Controller {
             'coworking_id' => 'required|uuid',
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+            'type' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'capacity' => 'required|integer',
             'price_hour' => 'nullable|numeric',
@@ -25,7 +27,7 @@ class CreateSpaceController extends Controller {
             'price_month' => 'nullable|numeric',
             'size_m2' => 'nullable|numeric',
             'available' => 'required|boolean',
-            'status' => 'required|string|max:255',
+            'status' => 'nullable|string|max:255',
         ]);
 
         $dto = new SpaceDTO(
@@ -33,7 +35,7 @@ class CreateSpaceController extends Controller {
             coworkingId: $validated['coworking_id'],
             name: $validated['name'],
             slug: $validated['slug'],
-            type: $validated['type'],
+            type: $validated['type'] ?? SpaceTypeEnumeration::FLEX->value,
             description: $validated['description'] ?? null,
             capacity: $validated['capacity'],
             priceHour: $validated['price_hour'] ?? null,
@@ -41,7 +43,7 @@ class CreateSpaceController extends Controller {
             priceMonth: $validated['price_month'] ?? null,
             sizeM2: $validated['size_m2'] ?? null,
             available: $validated['available'],
-            status: $validated['status'],
+            status: $validated['status'] ?? SpaceStatusEnumeration::ACTIVE->value,
         );
 
         $space = $this->useCase->execute($dto);

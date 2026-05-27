@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Src\BC\Subscription\Application\DTO\SubscriptionDTO;
 use Src\BC\Subscription\Application\UseCase\CreateSubscriptionUseCase;
+use Src\BC\Subscription\Domain\Enumerations\SubscriptionStatusEnumeration;
 
 class CreateSubscriptionController extends Controller {
     public function __construct(private readonly CreateSubscriptionUseCase $useCase) {}
@@ -18,7 +19,7 @@ class CreateSubscriptionController extends Controller {
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
             'auto_renewal' => 'required|boolean',
-            'status' => 'required|string|max:255',
+            'status' => 'nullable|string|max:255',
         ]);
 
         $dto = new SubscriptionDTO(
@@ -28,7 +29,7 @@ class CreateSubscriptionController extends Controller {
             startDate: $validated['start_date'],
             endDate: $validated['end_date'] ?? null,
             autoRenewal: $validated['auto_renewal'],
-            status: $validated['status'],
+            status: $validated['status'] ?? SubscriptionStatusEnumeration::PENDING->value,
         );
 
         $subscription = $this->useCase->execute($dto);

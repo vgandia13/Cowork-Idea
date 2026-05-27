@@ -16,7 +16,7 @@ return new class extends Migration
             $table->dateTime('end_date');
             $table->dateTime('created_at');
             $table->float('total');
-            $table->string('status');
+            $table->string('status')->default('pending');
             $table->text('notes')->nullable();
             $table->string('booking_code')->unique();
             $table->dateTime('updated_at')->nullable();
