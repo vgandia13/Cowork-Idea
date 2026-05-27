@@ -20,7 +20,7 @@ abstract class TimeValueObject
         }
     }
 
-    public function value(): DateTimeImmutable
+    public function value(): string
     {
         return $this->value;
     }

@@ -57,80 +57,92 @@ use Src\BC\User\UI\Controller\Auth\LogoutController;
 
 Route::prefix('v1')->group(function () {
 
-    Route::post('/auth/login',    LoginController::class);
+    // ─── Auth
+    Route::post('/auth/login',  LoginController::class);
     Route::post('/auth/logout', LogoutController::class)->middleware('auth:sanctum');
 
+    // Rutas publicas
+
+    // Users
+    Route::post('/users', CreateUserController::class);
+
+    // Coworkings
+    Route::get('/coworkings',                       ListCoworkingsController::class);
+    Route::get('/coworkings/slug/{slug}',            ReadCoworkingBySlugController::class);
+    Route::get('/coworkings/{id}',                  ReadCoworkingController::class);
+    Route::get('/coworkings/{id}/spaces',            ListCoworkingSpacesController::class);
+    Route::get('/coworkings/{id}/amenities',         ListCoworkingAmenitiesController::class);
+
+    // Spaces
+    Route::get('/spaces',                   ListSpacesController::class);
+    Route::get('/spaces/available',         ListAvailableSpacesController::class);
+    Route::get('/spaces/slug/{slug}',       ReadSpaceBySlugController::class);
+    Route::get('/spaces/{id}',              ReadSpaceController::class);
+
+    // Amenities
+    Route::get('/amenities',                ListAmenitiesController::class);
+    Route::post('/amenities',               CreateAmenityController::class);
+    Route::get('/amenities/{id}',           ReadAmenityController::class);
+
+    // Plans
+    Route::get('/plans',            ListPlansController::class);
+    Route::get('/plans/{id}',       ReadPlanController::class);
 
 
+    // Rutas admin
 
-    Route::middleware('auth-sanctum')->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
 
-    // ─── Users
-    Route::get('/users',                    ListUsersController::class)->middleware('role:admin');
-    Route::post('/users',                   CreateUserController::class);                          // registro de guest o admin
-    Route::get('/users/{id}',               ReadUserController::class)->middleware('role:admin,member');
-    Route::put('/users/{id}',               UpdateUserController::class)->middleware('role:admin,member');
-    Route::delete('/users/{id}',            DeleteUserController::class)->middleware('role:admin');
-    Route::patch('/users/{id}/active',      ToggleActiveUserController::class)->middleware('role:admin');
+        // Users
+        Route::get('/users',                    ListUsersController::class)->middleware('role:admin');
+        Route::get('/users/{id}',               ReadUserController::class)->middleware('role:admin,member');
+        Route::put('/users/{id}',               UpdateUserController::class)->middleware('role:admin,member');
+        Route::delete('/users/{id}',            DeleteUserController::class)->middleware('role:admin');
+        Route::patch('/users/{id}/active',      ToggleActiveUserController::class)->middleware('role:admin');
 
-    // ─── Coworkings
-    Route::get('/coworkings',                       ListCoworkingsController::class);              // guest
-    Route::post('/coworkings',                      CreateCoworkingController::class)->middleware('role:admin');
-    Route::get('/coworkings/slug/{slug}',            ReadCoworkingBySlugController::class);        // guest
-    Route::get('/coworkings/{id}',                  ReadCoworkingController::class);               // guest
-    Route::put('/coworkings/{id}',                  UpdateCoworkingController::class)->middleware('role:admin');
-    Route::delete('/coworkings/{id}',               DeleteCoworkingController::class)->middleware('role:admin');
-    Route::patch('/coworkings/{id}/active',          ToggleActiveCoworkingController::class)->middleware('role:admin');
-    Route::get('/coworkings/{id}/spaces',            ListCoworkingSpacesController::class);        // guest
-    Route::get('/coworkings/{id}/amenities',         ListCoworkingAmenitiesController::class);     // guest
+        // Coworkings
+        Route::post('/coworkings',                      CreateCoworkingController::class)->middleware('role:admin');
+        Route::put('/coworkings/{id}',                  UpdateCoworkingController::class)->middleware('role:admin');
+        Route::delete('/coworkings/{id}',               DeleteCoworkingController::class)->middleware('role:admin');
+        Route::patch('/coworkings/{id}/active',          ToggleActiveCoworkingController::class)->middleware('role:admin');
 
-    // ─── Spaces
-    Route::get('/spaces',                   ListSpacesController::class);                          // guest
-    Route::post('/spaces',                  CreateSpaceController::class)->middleware('role:admin');
-    Route::get('/spaces/available',         ListAvailableSpacesController::class);                 // guest
-    Route::get('/spaces/slug/{slug}',       ReadSpaceBySlugController::class);                     // guest
-    Route::get('/spaces/{id}',              ReadSpaceController::class);                           // guest
-    Route::put('/spaces/{id}',              UpdateSpaceController::class)->middleware('role:admin');
-    Route::delete('/spaces/{id}',           DeleteSpaceController::class)->middleware('role:admin');
-    Route::patch('/spaces/{id}/status',     ToggleStatusSpaceController::class)->middleware('role:admin');
-    Route::get('/spaces/{id}/bookings',     ListSpaceBookingsController::class)->middleware('role:admin');
+        // Spaces
+        Route::post('/spaces',                  CreateSpaceController::class)->middleware('role:admin');
+        Route::put('/spaces/{id}',              UpdateSpaceController::class)->middleware('role:admin');
+        Route::delete('/spaces/{id}',           DeleteSpaceController::class)->middleware('role:admin');
+        Route::patch('/spaces/{id}/status',     ToggleStatusSpaceController::class)->middleware('role:admin');
+        Route::get('/spaces/{id}/bookings',     ListSpaceBookingsController::class)->middleware('role:admin');
 
-    // ─── Amenities
-    Route::get('/amenities',                ListAmenitiesController::class);                       // guest
-    Route::post('/amenities',               CreateAmenityController::class)->middleware('role:admin');
-    Route::get('/amenities/{id}',           ReadAmenityController::class);                         // guest
-    Route::put('/amenities/{id}',           UpdateAmenityController::class)->middleware('role:admin');
-    Route::delete('/amenities/{id}',        DeleteAmenityController::class)->middleware('role:admin');
+        // Amenities
+        Route::put('/amenities/{id}',           UpdateAmenityController::class)->middleware('role:admin');
+        Route::delete('/amenities/{id}',        DeleteAmenityController::class)->middleware('role:admin');
 
-    // ─── Bookings
-    Route::get('/bookings',                         ListBookingsController::class)->middleware('role:admin');
-    Route::post('/bookings',                        CreateBookingController::class)->middleware('role:admin,member');
-    Route::get('/bookings/code/{booking_code}',     ReadBookingByCodeController::class)->middleware('role:admin,member');
-    Route::get('/bookings/{id}',                    ReadBookingController::class)->middleware('role:admin,member');
-    Route::put('/bookings/{id}',                    UpdateBookingController::class)->middleware('role:admin');
-    Route::delete('/bookings/{id}',                 DeleteBookingController::class)->middleware('role:admin');
-    Route::patch('/bookings/{id}/status',            ToggleStatusBookingController::class)->middleware('role:admin');
+        // Bookings
+        Route::get('/bookings',                         ListBookingsController::class)->middleware('role:admin');
+        Route::post('/bookings',                        CreateBookingController::class)->middleware('role:admin,member');
+        Route::get('/bookings/code/{booking_code}',     ReadBookingByCodeController::class)->middleware('role:admin,member');
+        Route::get('/bookings/{id}',                    ReadBookingController::class)->middleware('role:admin,member');
+        Route::put('/bookings/{id}',                    UpdateBookingController::class)->middleware('role:admin');
+        Route::delete('/bookings/{id}',                 DeleteBookingController::class)->middleware('role:admin');
+        Route::patch('/bookings/{id}/status',            ToggleStatusBookingController::class)->middleware('role:admin');
 
-    // ─── Plans
-    Route::get('/plans',                    ListPlansController::class);                           // guest
-    Route::post('/plans',                   CreatePlanController::class)->middleware('role:admin');
-    Route::get('/plans/{id}',               ReadPlanController::class);                            // guest
-    Route::put('/plans/{id}',               UpdatePlanController::class)->middleware('role:admin');
-    Route::delete('/plans/{id}',            DeletePlanController::class)->middleware('role:admin');
-    Route::patch('/plans/{id}/active',      ToggleActivePlanController::class)->middleware('role:admin');
+        // Plans
+        Route::post('/plans',                   CreatePlanController::class)->middleware('role:admin');
+        Route::put('/plans/{id}',               UpdatePlanController::class)->middleware('role:admin');
+        Route::delete('/plans/{id}',            DeletePlanController::class)->middleware('role:admin');
+        Route::patch('/plans/{id}/active',      ToggleActivePlanController::class)->middleware('role:admin');
 
-    // ─── Subscriptions
-    Route::get('/subscriptions',                    ListSubscriptionsController::class)->middleware('role:admin');
-    Route::post('/subscriptions',                   CreateSubscriptionController::class)->middleware('role:admin,member');
-    Route::get('/subscriptions/{id}',               ReadSubscriptionController::class)->middleware('role:admin,member');
-    Route::put('/subscriptions/{id}',               UpdateSubscriptionController::class)->middleware('role:admin');
-    Route::delete('/subscriptions/{id}',            DeleteSubscriptionController::class)->middleware('role:admin');
-    Route::patch('/subscriptions/{id}/status',      ToggleStatusSubscriptionController::class)->middleware('role:admin');
+        // Subscriptions
+        Route::get('/subscriptions',                    ListSubscriptionsController::class)->middleware('role:admin');
+        Route::post('/subscriptions',                   CreateSubscriptionController::class)->middleware('role:admin,member');
+        Route::get('/subscriptions/{id}',               ReadSubscriptionController::class)->middleware('role:admin,member');
+        Route::put('/subscriptions/{id}',               UpdateSubscriptionController::class)->middleware('role:admin');
+        Route::delete('/subscriptions/{id}',            DeleteSubscriptionController::class)->middleware('role:admin');
+        Route::patch('/subscriptions/{id}/status',      ToggleStatusSubscriptionController::class)->middleware('role:admin');
 
-    // ─── Cross (nested under users)
-    Route::get('/users/{id}/bookings',              ListUserBookingsController::class)->middleware('role:admin,member');
-    Route::get('/users/{id}/subscriptions',         ListUserSubscriptionsController::class)->middleware('role:admin,member');
-    Route::get('/users/{id}/subscriptions/active',  ReadActiveUserSubscriptionController::class)->middleware('role:admin,member');
-
-});
+        // Cross (nested under users)
+        Route::get('/users/{id}/bookings',              ListUserBookingsController::class)->middleware('role:admin,member');
+        Route::get('/users/{id}/subscriptions',         ListUserSubscriptionsController::class)->middleware('role:admin,member');
+        Route::get('/users/{id}/subscriptions/active',  ReadActiveUserSubscriptionController::class)->middleware('role:admin,member');
+    });
 });

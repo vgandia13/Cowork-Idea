@@ -2,6 +2,7 @@
 
 namespace Src\BC\User\Domain\Entities;
 
+use DateTimeImmutable;
 use JsonSerializable;
 use Src\BC\User\Domain\ValueObjects\UserIdValueObject;
 use Src\BC\User\Domain\ValueObjects\UserFirstNameValueObject;
@@ -53,7 +54,7 @@ class User implements JsonSerializable {
     public function getRoleValue(): string { return $this->role?->value(); }
 
     public function getRegistrationDate(): UserRegistrationDateValueObject { return $this->registrationDate; }
-    public function getRegistrationDateValue(): string { return $this->registrationDate?->value(); }
+    public function getRegistrationDateValue(): ?DateTimeImmutable { return $this->registrationDate?->value(); }
 
     public function getActive(): UserActiveValueObject {return $this->active; }
     public function getActiveValue(): bool { return $this->active?->value();  }
@@ -68,7 +69,7 @@ class User implements JsonSerializable {
             'phone' => $this->getPhoneValue(),
             'password_hash' => $this->getPasswordHashValue(),
             'role' => $this->getRoleValue(),
-            'registration_date' => $this->getRegistrationDateValue(),
+            'registration_date' => $this->getRegistrationDateValue()?->format('c'),
             'active' => $this->getActiveValue(),
         ];
     }
