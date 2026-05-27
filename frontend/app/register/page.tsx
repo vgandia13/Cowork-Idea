@@ -8,11 +8,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface Payload {
+  firstName: string;
+  lastName: string;
+  phone?: string;
   email: string;
   password: string;
 }
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const {
     register,
     handleSubmit,
@@ -28,14 +31,38 @@ const LoginPage = () => {
     <Card className="bg-background-light p-8 space-y-12 w-1/2 mx-auto mt-16">
       <CardHeader className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-text-dark">
-          Iniciar Sesión
+          Registrarse
         </h1>
         <p className="text-lg text-text-dark">
-          Accede a tu cuenta para reservar tu espacio de trabajo ideal.
+          Crea tu cuenta para reservar tu espacio de trabajo ideal.
         </p>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 ">
         <form onSubmit={handleSubmit(onsubmit)}>
+          <Field>
+            <FieldLabel className="text-text-dark">Nombre</FieldLabel>
+            <Input
+              type="text"
+              placeholder="John"
+              className="text-text-dark"
+              {...register("firstName", { required: true })}
+            />
+            {errors.firstName && (
+              <span className="text-red-500">El nombre es requerido</span>
+            )}
+          </Field>
+          <Field>
+            <FieldLabel className="text-text-dark">Apellido</FieldLabel>
+            <Input
+              type="text"
+              placeholder="Pork"
+              className="text-text-dark"
+              {...register("lastName", { required: true })}
+            />
+            {errors.lastName && (
+              <span className="text-red-500">El apellido es requerido</span>
+            )}
+          </Field>
           <Field>
             <FieldLabel className="text-text-dark">
               Correo Electrónico
@@ -51,6 +78,17 @@ const LoginPage = () => {
                 El correo electrónico es requerido
               </span>
             )}
+          </Field>
+          <Field>
+            <FieldLabel className="text-text-dark">
+              Teléfono (opcional)
+            </FieldLabel>
+            <Input
+              type="tel"
+              placeholder="123-456-7890"
+              className="text-text-dark"
+              {...register("phone", { required: false })}
+            />
           </Field>
           <Field>
             <FieldLabel className="text-text-dark">Contraseña</FieldLabel>
@@ -80,11 +118,11 @@ const LoginPage = () => {
             )}
           </Field>
 
-          <Input type="submit" value="Iniciar Sesión" className="mt-3" />
+          <Input type="submit" value="Registrarse" className="mt-3" />
         </form>
       </CardContent>
     </Card>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
