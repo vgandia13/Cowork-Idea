@@ -25,7 +25,7 @@ const LoginPage = () => {
   };
 
   return (
-    <Card className="bg-background-light p-8 space-y-12 w-1/2 mx-auto mt-16">
+    <Card className="bg-background-light p-8 space-y-12 w-1/3 mx-auto mt-16">
       <CardHeader className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-text-dark">
           Iniciar Sesión
