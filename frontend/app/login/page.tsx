@@ -20,8 +20,29 @@ const LoginPage = () => {
   } = useForm<Payload>();
   const [viewPassword, setViewPassword] = useState(false);
 
-  const onsubmit = (data: Payload) => {
-    console.log("Datos del usuario: ", data);
+  const onsubmit = async (data: Payload) => {
+    try {
+      const response = await fetch("/api/users/RTLogin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Error al iniciar sesión");
+      }
+
+      console.log("Inicio de sesión exitoso:", result);
+      // Aquí podrías redirigir al usuario:
+      // router.push("/dashboard");
+    } catch (error) {
+      console.error("Error en el login:", error);
+      alert(error instanceof Error ? error.message : "Error desconocido");
+    }
   };
 
   return (
