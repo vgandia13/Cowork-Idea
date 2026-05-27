@@ -94,7 +94,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/users',                    ListUsersController::class)->middleware('role:admin');//
         Route::get('/users/{id}',               ReadUserController::class)->middleware('role:admin,member');
         Route::put('/users/{id}',               UpdateUserController::class)->middleware('role:admin,member');
-        Route::delete('/users/{id}',            DeleteUserController::class);//->middleware('role:admin')
+        Route::delete('/users/{id}',            DeleteUserController::class)->middleware('role:admin');//
         Route::patch('/users/{id}/active',      ToggleActiveUserController::class)->middleware('role:admin');
 
         // Coworkings

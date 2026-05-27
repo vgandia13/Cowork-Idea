@@ -14,6 +14,8 @@ use Laravel\Sanctum\HasApiTokens;
 #[Hidden(['password_hash', 'remember_token'])]
 class User extends Authenticatable
 {
+    protected $keyType = 'string';
+    public $incrementing = false;
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
 
