@@ -1,7 +1,7 @@
 <?php
 
 namespace Src\BC\User\UI\Controller\Auth;
-
+use Illuminate\Http\Request;
 
 class LogoutController {
 

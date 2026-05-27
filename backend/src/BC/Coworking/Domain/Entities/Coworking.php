@@ -22,6 +22,7 @@ use Src\BC\Coworking\Domain\ValueObjects\CoworkingActiveValueObject;
 class Coworking implements JsonSerializable
 {
     private CoworkingIdValueObject $id;
+    private array $amenities = [];
 
     public function __construct(
         CoworkingIdValueObject $id,
@@ -88,6 +89,9 @@ class Coworking implements JsonSerializable
     public function getActive(): CoworkingActiveValueObject { return $this->active; }
     public function getActiveValue(): bool { return $this->active?->value(); }
 
+    public function getAmenities(): array { return $this->amenities; }
+    public function setAmenities(array $amenities): void { $this->amenities = $amenities; }
+
     public function jsonSerialize(): mixed {
         return [
             'id' => $this->getIdValue(),
@@ -105,6 +109,7 @@ class Coworking implements JsonSerializable
             'cover' => $this->getCoverValue(),
             'gallery' => $this->getGalleryValue(),
             'active' => $this->getActiveValue(),
+            'amenities' => $this->amenities,
         ];
     }
 }

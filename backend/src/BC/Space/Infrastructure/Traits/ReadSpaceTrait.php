@@ -8,6 +8,6 @@ trait ReadSpaceTrait
 {
     public function findByIdFromModel(string $id): ?SpaceModel
     {
-        return SpaceModel::find($id);
+        return SpaceModel::with('amenities')->find($id);
     }
 }

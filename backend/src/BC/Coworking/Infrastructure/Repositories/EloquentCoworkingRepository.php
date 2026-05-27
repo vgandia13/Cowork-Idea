@@ -65,7 +65,7 @@ class EloquentCoworkingRepository implements CoworkingRepositoryPort
 
     public function findBySlug(string $slug): ?Coworking
     {
-        $model = CoworkingModel::where('slug', $slug)->first();
+        $model = CoworkingModel::with('amenities')->where('slug', $slug)->first();
         if (!$model) {
             return null;
         }

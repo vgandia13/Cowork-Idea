@@ -8,6 +8,6 @@ trait ReadCoworkingTrait
 {
     public function findByIdFromModel(string $id): ?CoworkingModel
     {
-        return CoworkingModel::find($id);
+        return CoworkingModel::with('amenities')->find($id);
     }
 }

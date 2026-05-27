@@ -20,6 +20,7 @@ use Src\BC\Space\Domain\ValueObjects\SpaceStatusValueObject;
 class Space implements JsonSerializable
 {
     private SpaceIdValueObject $id;
+    private array $amenities = [];
 
     public function __construct(
         SpaceIdValueObject $id,
@@ -78,6 +79,9 @@ class Space implements JsonSerializable
     public function getStatus(): SpaceStatusValueObject { return $this->status;  }
     public function getStatusValue(): string { return $this->status?->value(); }
 
+    public function getAmenities(): array { return $this->amenities; }
+    public function setAmenities(array $amenities): void { $this->amenities = $amenities; }
+
     public function jsonSerialize(): mixed {
         return [
             'id' => $this->getIdValue(),
@@ -93,6 +97,7 @@ class Space implements JsonSerializable
             'size_m2' => $this->getSizeM2Value(),
             'available' => $this->getAvailableValue(),
             'status' => $this->getStatusValue(),
+            'amenities' => $this->amenities,
         ];
     }
 }

@@ -22,7 +22,7 @@ class SpaceHydrator
 {
     public static function toEntity(SpaceModel $model): Space
     {
-        return new Space(
+        $entity = new Space(
             new SpaceIdValueObject($model->id),
             new SpaceCoworkingIdValueObject($model->coworking_id),
             new SpaceNameValueObject($model->name),
@@ -37,6 +37,19 @@ class SpaceHydrator
             new SpaceAvailableValueObject($model->available),
             new SpaceStatusValueObject($model->status),
         );
+
+        if ($model->relationLoaded('amenities')) {
+            $entity->setAmenities(
+                $model->amenities->map(fn ($a) => [
+                    'id' => $a->id,
+                    'name' => $a->name,
+                    'icon' => $a->icon,
+                    'description' => $a->description,
+                ])->toArray()
+            );
+        }
+
+        return $entity;
     }
 
     public static function toEntityFromPaginator(\Illuminate\Support\Collection $items): array

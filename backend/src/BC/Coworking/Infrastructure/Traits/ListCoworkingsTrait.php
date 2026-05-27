@@ -9,7 +9,7 @@ trait ListCoworkingsTrait
 {
     public function findAllFromModel(int $page = 1, int $perPage = 15): LengthAwarePaginator
     {
-        return CoworkingModel::query()->paginate($perPage, ['*'], 'page', $page);
+        return CoworkingModel::with('amenities')->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function countAllFromModel(): int

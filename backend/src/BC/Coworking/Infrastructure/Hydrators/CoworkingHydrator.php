@@ -24,7 +24,7 @@ class CoworkingHydrator
 {
     public static function toEntity(CoworkingModel $model): Coworking
     {
-        return new Coworking(
+        $entity = new Coworking(
             new CoworkingIdValueObject($model->id),
             new CoworkingNameValueObject($model->name),
             new CoworkingSlugValueObject($model->slug),
@@ -41,6 +41,19 @@ class CoworkingHydrator
             $model->gallery ? new CoworkingGalleryValueObject($model->gallery) : null,
             new CoworkingActiveValueObject($model->active),
         );
+
+        if ($model->relationLoaded('amenities')) {
+            $entity->setAmenities(
+                $model->amenities->map(fn ($a) => [
+                    'id' => $a->id,
+                    'name' => $a->name,
+                    'icon' => $a->icon,
+                    'description' => $a->description,
+                ])->toArray()
+            );
+        }
+
+        return $entity;
     }
 
     public static function toEntityFromPaginator(\Illuminate\Support\Collection $items): array

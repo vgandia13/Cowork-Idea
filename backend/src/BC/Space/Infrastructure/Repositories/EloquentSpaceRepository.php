@@ -65,7 +65,7 @@ class EloquentSpaceRepository implements SpaceRepositoryPort
 
     public function findBySlug(string $slug): ?Space
     {
-        $model = SpaceModel::where('slug', $slug)->first();
+        $model = SpaceModel::with('amenities')->where('slug', $slug)->first();
         if (!$model) {
             return null;
         }
@@ -74,13 +74,13 @@ class EloquentSpaceRepository implements SpaceRepositoryPort
 
     public function findByCoworkingId(string $coworkingId): array
     {
-        $models = SpaceModel::where('coworking_id', $coworkingId)->get();
+        $models = SpaceModel::with('amenities')->where('coworking_id', $coworkingId)->get();
         return $models->map(fn($model) => SpaceHydrator::toEntity($model))->toArray();
     }
 
     public function findAvailable(array $filters): array
     {
-        $query = SpaceModel::where('available', true);
+        $query = SpaceModel::with('amenities')->where('available', true);
 
         if (isset($filters['type'])) {
             $query->where('type', $filters['type']);

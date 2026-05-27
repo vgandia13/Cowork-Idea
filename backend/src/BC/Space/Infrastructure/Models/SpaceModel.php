@@ -3,6 +3,8 @@
 namespace Src\BC\Space\Infrastructure\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Src\BC\Amenity\Infrastructure\Models\AmenityModel;
 
 class SpaceModel extends Model
 {
@@ -36,4 +38,9 @@ class SpaceModel extends Model
         'size_m2' => 'float',
         'available' => 'boolean',
     ];
+
+    public function amenities(): BelongsToMany
+    {
+        return $this->belongsToMany(AmenityModel::class, 'space_amenity', 'space_id', 'amenity_id');
+    }
 }

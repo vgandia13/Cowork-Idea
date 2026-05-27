@@ -9,7 +9,7 @@ trait ListSpacesTrait
 {
     public function findAllFromModel(int $page = 1, int $perPage = 15): LengthAwarePaginator
     {
-        return SpaceModel::query()->paginate($perPage, ['*'], 'page', $page);
+        return SpaceModel::with('amenities')->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function countAllFromModel(): int
