@@ -5,7 +5,7 @@ import { BusinessHours } from "@/types/BusinessHours";
 export async function GET(req: NextRequest) {
   try {
     const response = await axios.get<BusinessHours[]>(
-      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1"}/business-hours`,
+      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1"}/business-hours`,
     );
     if (response.status !== 200) {
       return NextResponse.json(

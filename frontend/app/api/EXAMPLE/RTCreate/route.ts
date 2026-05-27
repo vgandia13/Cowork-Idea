@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const response = await axios.post<BusinessHours>(
-      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1"}/business-hours`,
+      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1"}/business-hours`,
       body,
     );
     if (response.status !== 201) {

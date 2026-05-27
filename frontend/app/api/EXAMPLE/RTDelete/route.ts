@@ -9,7 +9,7 @@ export default async function handler(
   const { id } = req.query;
   try {
     const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1"}/business-hours/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1"}/business-hours/${id}`,
     );
     if (response.status !== 200 && response.status !== 204) {
       return res

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { serialize } from "cookie";
 
-const API_URL = "http://localhost:8080/api/v1/auth";
+const API_URL = "http://localhost:8000/api/v1/auth";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    console.log("Conectando a:", `${API_URL}/login`);
     const response = await axios.post(`${API_URL}/login`, { email, password });
     const { token } = response.data;
 
@@ -46,8 +47,9 @@ export async function POST(req: NextRequest) {
     return responseData;
   } catch (error) {
     if (axios.isAxiosError(error)) {
+      console.log("Error de Laravel:", error.response?.data);
       return NextResponse.json(
-        { error: error.response?.data?.message || "Error en la API externa" },
+        { error: error.response?.data?.message || error.response?.data?.error || "Error en la API externa" },
         { status: error.response?.status || 500 }
       );
     }
