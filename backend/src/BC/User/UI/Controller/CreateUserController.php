@@ -11,7 +11,7 @@ use Src\BC\User\Domain\Enumerations\UserRoleEnumeration;
 
 class CreateUserController extends Controller {
 
-    public function __construct(private readonly CreateUserUseCase $useCase ) {}
+    public function __construct(private readonly CreateUserUseCase $useCase) {}
 
     public function __invoke(Request $request): JsonResponse {
         $validated = $request->validate([
@@ -32,7 +32,7 @@ class CreateUserController extends Controller {
             email: $validated['email'],
             phone: $validated['phone'] ?? null,
             passwordHash: $validated['password_hash'],
-            role: $validated['role'] ?? UserRoleEnumeration::GUEST->value,
+            role: $validated['role'] ?? UserRoleEnumeration::MEMBER->value,
             registrationDate: $validated['registration_date'],
             active: $validated['active'],
         );

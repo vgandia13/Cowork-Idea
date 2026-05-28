@@ -10,7 +10,6 @@ class CoworkingDTO
         public readonly string $slug,
         public readonly string $address,
         public readonly string $city,
-        public readonly string $country,
         public readonly string $postalCode,
         public readonly ?string $phone,
         public readonly ?string $email,

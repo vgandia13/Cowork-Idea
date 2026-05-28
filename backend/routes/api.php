@@ -58,8 +58,8 @@ use Src\BC\User\UI\Controller\Auth\LogoutController;
 Route::prefix('v1')->group(function () {
 
     // ─── Auth
-    Route::post('/auth/login',  LoginController::class)->name('login');
-    Route::post('/auth/logout', LogoutController::class)->middleware('auth:sanctum');
+    Route::post('/user/login',  LoginController::class);
+    Route::post('/user/logout', LogoutController::class)->middleware('auth:sanctum');
 
 
     // Users
