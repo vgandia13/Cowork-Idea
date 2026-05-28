@@ -46,6 +46,7 @@ use Src\BC\Subscription\UI\Controller\ReadActiveUserSubscriptionController;
 use Src\BC\Subscription\UI\Controller\ReadSubscriptionController;
 use Src\BC\Subscription\UI\Controller\ToggleStatusSubscriptionController;
 use Src\BC\Subscription\UI\Controller\UpdateSubscriptionController;
+use Src\BC\User\UI\Controller\CreateUserController;
 use Src\BC\User\UI\Controller\DeleteUserController;
 use Src\BC\User\UI\Controller\ListUsersController;
 use Src\BC\User\UI\Controller\ReadUserController;
@@ -53,17 +54,16 @@ use Src\BC\User\UI\Controller\ToggleActiveUserController;
 use Src\BC\User\UI\Controller\UpdateUserController;
 use Src\BC\User\UI\Controller\Auth\LoginController;
 use Src\BC\User\UI\Controller\Auth\LogoutController;
-use Src\BC\User\UI\Controller\Auth\RegisterController;
 
 Route::prefix('v1')->group(function () {
 
     // ─── Auth
-    Route::post('/user/login',  LoginController::class);
-    Route::post('/user/logout', LogoutController::class)->middleware('auth:sanctum');
+    Route::post('/auth/login',  LoginController::class);
+    Route::post('/auth/logout', LogoutController::class)->middleware('auth:api');
 
 
     // Users
-    Route::post('/users', RegisterController::class);
+    Route::post('/users', CreateUserController::class);
 
     // Coworkings
     Route::get('/coworkings',                       ListCoworkingsController::class);
@@ -88,13 +88,13 @@ Route::prefix('v1')->group(function () {
     Route::get('/plans/{id}',       ReadPlanController::class);
 
 
-    Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware(['auth:api'])->group(function () {
         Route::get('/users', ListUsersController::class)->middleware('role:admin');
         Route::get('/users/{id}', ReadUserController::class)->middleware('role:admin,member');
         Route::put('/users/{id}', UpdateUserController::class)->middleware('role:admin,member');
         Route::delete('/users/{id}', DeleteUserController::class)->middleware('role:admin');
         Route::patch('/users/{id}/active', ToggleActiveUserController::class)->middleware('role:admin');
-        // ... rest of the code
+        
 
         // Coworkings
         Route::post('/coworkings',                      CreateCoworkingController::class)->middleware('role:admin');

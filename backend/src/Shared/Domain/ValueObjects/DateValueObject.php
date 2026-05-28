@@ -9,9 +9,11 @@ abstract class DateValueObject
 {
     private DateTimeImmutable $value;
 
-    public function __construct(DateTimeInterface $value)
+    public function __construct(DateTimeInterface|string $value)
     {
-        if ($value instanceof DateTimeImmutable) {
+        if (is_string($value)) {
+            $this->value = new DateTimeImmutable($value);
+        } elseif ($value instanceof DateTimeImmutable) {
             $this->value = $value;
         } else {
             $this->value = DateTimeImmutable::createFromInterface($value);

@@ -17,7 +17,7 @@ class CreateUserController extends Controller {
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:255',
             'password_hash' => 'required|string|max:255',
             'role' => 'nullable|string|max:255',
@@ -34,7 +34,7 @@ class CreateUserController extends Controller {
             passwordHash: $validated['password_hash'],
             role: $validated['role'] ?? UserRoleEnumeration::MEMBER->value,
             registrationDate: $validated['registration_date'],
-            active: $validated['active'],
+            active: true,
         );
 
         $user = $this->useCase->execute($dto);

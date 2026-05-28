@@ -2,9 +2,10 @@
 
 namespace Src\BC\User\UI\Controller\Auth;
 
-
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class LoginController {
     public function __invoke(Request $request)
@@ -14,12 +15,13 @@ class LoginController {
             'password' => 'required|string|max:255',
         ]);
 
-        if (!Auth::guard('web')->attempt($credentials)) {
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user || !Hash::check($credentials['password'], $user->password_hash)) {
             return response()->json(['message' => 'Las credenciales no son correctas'], 401);
         }
 
-        $user  = Auth::guard('web')->user();
-        $token = $user->createToken('api-token')->plainTextToken;
+        $token = JWTAuth::fromUser($user);
 
         return response()->json([
             'token' => $token,

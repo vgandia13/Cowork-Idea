@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 #[Fillable(['email', 'password_hash'])]
 #[Hidden(['password_hash', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     protected $keyType = 'string';
     public $incrementing = false;
@@ -22,6 +23,16 @@ class User extends Authenticatable
     public function getAuthPassword()
     {
         return $this->password_hash;
+    }
+
+    public function getJWTIdentifier(): mixed
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims(): array
+    {
+        return [];
     }
 
     protected function casts(): array

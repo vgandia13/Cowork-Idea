@@ -13,7 +13,7 @@ class UserDTO
         public readonly string $passwordHash,
         public readonly string $role = 'Member',
         public readonly string $registrationDate,
-        public readonly bool $active,
+        public readonly bool $active =true,
     ) {
     }
 }

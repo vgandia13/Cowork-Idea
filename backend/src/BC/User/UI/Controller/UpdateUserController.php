@@ -5,6 +5,7 @@ namespace Src\BC\User\UI\Controller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Src\BC\User\Application\DTO\UserUpdateDTO;
 use Src\BC\User\Application\UseCase\UpdateUserUseCase;
 
@@ -16,9 +17,9 @@ class UpdateUserController extends Controller {
         $validated = $request->validate([
             'first_name' => 'sometimes|string|max:255',
             'last_name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|max:255',
             'phone' => 'sometimes|nullable|string|max:255',
-            'password_hash' => 'sometimes|string|max:255',
+            'password' => 'sometimes|string|min:8|max:255',
             'role' => 'sometimes|string|max:255',
             'registration_date' => 'sometimes|date',
             'active' => 'sometimes|boolean',
@@ -30,8 +31,7 @@ class UpdateUserController extends Controller {
             lastName: $validated['last_name'] ?? null,
             email: $validated['email'] ?? null,
             phone: $validated['phone'] ?? null,
-            passwordHash: $validated['password_hash'] ?? null,
-
+            passwordHash: isset($validated['password']) ? Hash::make($validated['password']) : null,
             role: $validated['role'] ?? null,
             registrationDate: $validated['registration_date'] ?? null,
             active: $validated['active'] ?? null,

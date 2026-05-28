@@ -34,9 +34,9 @@ class RegisterController
             email: $validated['email'],
             phone: $validated['phone'] ?? null,
             passwordHash: Hash::make($validated['password']),
-            role: $validated['role'] ?? UserRoleEnumeration::GUEST->value,
-            registrationDate: $validated['registration_date'],
-            active: $validated['active'],
+            role: $validated['role'] ?? UserRoleEnumeration::MEMBER->value,
+            registrationDate: now(),
+            active: true,
         );
 
         $user = $this->useCase->execute($dto);
