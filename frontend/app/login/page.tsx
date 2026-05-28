@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 interface Payload {
   email: string;
@@ -13,6 +14,7 @@ interface Payload {
 }
 
 const LoginPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -37,8 +39,8 @@ const LoginPage = () => {
       }
 
       console.log("Inicio de sesión exitoso:", result);
-      // Aquí podrías redirigir al usuario:
-      // router.push("/dashboard");
+      // Redirigir a la página de inicio después del login exitoso
+      router.push("/");
     } catch (error) {
       console.error("Error en el login:", error);
       alert(error instanceof Error ? error.message : "Error desconocido");
