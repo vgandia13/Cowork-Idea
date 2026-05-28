@@ -14,11 +14,11 @@ class LoginController {
             'password' => 'required|string|max:255',
         ]);
 
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::guard('web')->attempt($credentials)) {
             return response()->json(['message' => 'Las credenciales no son correctas'], 401);
         }
 
-        $user  = Auth::user();
+        $user  = Auth::guard('web')->user();
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
