@@ -14,8 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
-            'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         ]);
+        $middleware->redirectGuestsTo('/api/v1/auth/login');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

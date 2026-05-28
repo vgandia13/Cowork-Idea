@@ -58,7 +58,7 @@ use Src\BC\User\UI\Controller\Auth\LogoutController;
 Route::prefix('v1')->group(function () {
 
     // ─── Auth
-    Route::post('/auth/login',  LoginController::class);
+    Route::post('/auth/login',  LoginController::class)->name('login');
     Route::post('/auth/logout', LogoutController::class)->middleware('auth:sanctum');
 
 
@@ -89,13 +89,12 @@ Route::prefix('v1')->group(function () {
 
 
     Route::middleware(['auth:sanctum'])->group(function () {
-
-        // Users
-        Route::get('/users',                    ListUsersController::class)->middleware('role:admin');//
-        Route::get('/users/{id}',               ReadUserController::class)->middleware('role:admin,member');
-        Route::put('/users/{id}',               UpdateUserController::class)->middleware('role:admin,member');
-        Route::delete('/users/{id}',            DeleteUserController::class)->middleware('role:admin');//
-        Route::patch('/users/{id}/active',      ToggleActiveUserController::class)->middleware('role:admin');
+        Route::get('/users', ListUsersController::class)->middleware('role:admin');
+        Route::get('/users/{id}', ReadUserController::class)->middleware('role:admin,member');
+        Route::put('/users/{id}', UpdateUserController::class)->middleware('role:admin,member');
+        Route::delete('/users/{id}', DeleteUserController::class)->middleware('role:admin');
+        Route::patch('/users/{id}/active', ToggleActiveUserController::class)->middleware('role:admin');
+        // ... rest of the code
 
         // Coworkings
         Route::post('/coworkings',                      CreateCoworkingController::class)->middleware('role:admin');
