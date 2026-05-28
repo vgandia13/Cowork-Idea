@@ -46,7 +46,6 @@ use Src\BC\Subscription\UI\Controller\ReadActiveUserSubscriptionController;
 use Src\BC\Subscription\UI\Controller\ReadSubscriptionController;
 use Src\BC\Subscription\UI\Controller\ToggleStatusSubscriptionController;
 use Src\BC\Subscription\UI\Controller\UpdateSubscriptionController;
-use Src\BC\User\UI\Controller\CreateUserController;
 use Src\BC\User\UI\Controller\DeleteUserController;
 use Src\BC\User\UI\Controller\ListUsersController;
 use Src\BC\User\UI\Controller\ReadUserController;
@@ -54,6 +53,7 @@ use Src\BC\User\UI\Controller\ToggleActiveUserController;
 use Src\BC\User\UI\Controller\UpdateUserController;
 use Src\BC\User\UI\Controller\Auth\LoginController;
 use Src\BC\User\UI\Controller\Auth\LogoutController;
+use Src\BC\User\UI\Controller\Auth\RegisterController;
 
 Route::prefix('v1')->group(function () {
 
@@ -63,7 +63,7 @@ Route::prefix('v1')->group(function () {
 
 
     // Users
-    Route::post('/users', CreateUserController::class);
+    Route::post('/users', RegisterController::class);
 
     // Coworkings
     Route::get('/coworkings',                       ListCoworkingsController::class);
