@@ -11,6 +11,7 @@ use Src\BC\User\Infrastructure\Services\DependencyInversionServices as UserDIS;
 
 return [
     AppServiceProvider::class,
+    Laravel\Sanctum\SanctumServiceProvider::class,
     AmenityDIS::class,
     BookingDIS::class,
     CoworkingDIS::class,
