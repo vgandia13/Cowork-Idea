@@ -28,16 +28,15 @@ const RegisterPage = () => {
 
   const onsubmit = async (data: Payload) => {
     // Creamos un nuevo objeto solo con los campos requeridos y el teléfono solo si tiene valor
-    const payload: Payload = {
-      firstName: data.firstName,
-      lastName: data.lastName,
+    const payload = {
+      first_name: data.firstName,
+      last_name: data.lastName,
       email: data.email,
-      password: data.password,
+      password_hash: data.password,
+      registration_date: new Date().toISOString().split('T')[0],
+      active: true,
+      phone: data.phone || null,
     };
-
-    if (data.phone && data.phone.trim() !== "") {
-      payload.phone = data.phone;
-    }
 
     console.log("Payload enviado a la API:", JSON.stringify(payload));
 

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { serialize } from "cookie";
 
-const API_URL = "http://localhost:8000/api/v1/users";
+const API_URL = "http://localhost:8000/api/v1/auth";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
