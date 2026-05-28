@@ -137,7 +137,7 @@ Route::prefix('v1')->group(function () {
         Route::delete('/subscriptions/{id}',            DeleteSubscriptionController::class)->middleware('role:admin');
         Route::patch('/subscriptions/{id}/status',      ToggleStatusSubscriptionController::class)->middleware('role:admin');
 
-        // Cross (nested under users)
+        // Crossed
         Route::get('/users/{id}/bookings',              ListUserBookingsController::class)->middleware('role:admin,member');
         Route::get('/users/{id}/subscriptions',         ListUserSubscriptionsController::class)->middleware('role:admin,member');
         Route::get('/users/{id}/subscriptions/active',  ReadActiveUserSubscriptionController::class)->middleware('role:admin,member');

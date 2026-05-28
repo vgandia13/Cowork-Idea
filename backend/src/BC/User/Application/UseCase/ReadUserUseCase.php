@@ -11,8 +11,6 @@ class ReadUserUseCase
     public function __construct(private readonly UserRepositoryPort $repository) {}
 
     public function execute(string $id): ?User {
-        return $this->repository->findById(
-            new UserIdValueObject($id)
-        );
+        return $this->repository->findById(new UserIdValueObject($id));
     }
 }

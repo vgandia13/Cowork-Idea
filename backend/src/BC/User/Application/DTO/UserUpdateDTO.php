@@ -11,10 +11,7 @@ class UserUpdateDTO
         public readonly ?string $email,
         public readonly ?string $phone,
         public readonly ?string $passwordHash,
-        public readonly ?string $avatar,
-        public readonly ?string $company,
         public readonly ?string $role,
-        public readonly ?string $bio,
         public readonly ?string $registrationDate,
         public readonly ?bool $active,
     ) {
