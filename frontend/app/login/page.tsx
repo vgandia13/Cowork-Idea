@@ -39,7 +39,7 @@ const LoginPage = () => {
       }
 
       console.log("Inicio de sesión exitoso:", result);
-      // Redirigir a la página de inicio después del login exitoso
+      
       router.push("/");
     } catch (error) {
       console.error("Error en el login:", error);

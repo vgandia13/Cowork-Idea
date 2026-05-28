@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 interface Payload {
   firstName: string;
@@ -23,8 +24,45 @@ const RegisterPage = () => {
   } = useForm<Payload>();
   const [viewPassword, setViewPassword] = useState(false);
 
-  const onsubmit = (data: Payload) => {
-    console.log("Datos del usuario: ", data);
+  const router = useRouter();
+
+  const onsubmit = async (data: Payload) => {
+    // Creamos un nuevo objeto solo con los campos requeridos y el teléfono solo si tiene valor
+    const payload: Payload = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    };
+
+    if (data.phone && data.phone.trim() !== "") {
+      payload.phone = data.phone;
+    }
+
+    console.log("Payload enviado a la API:", JSON.stringify(payload));
+
+    try {
+      const response = await fetch("/api/users/RTRegister", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Error al registrar usuario");
+      }
+
+      console.log("Registro exitoso:", result);
+      
+      router.push("/login");
+    } catch (error) {
+      console.error("Error en el registro:", error);
+      alert(error instanceof Error ? error.message : "Error desconocido");
+    }
   };
 
   return (
