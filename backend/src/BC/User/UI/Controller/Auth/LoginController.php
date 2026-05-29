@@ -5,6 +5,7 @@ namespace Src\BC\User\UI\Controller\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class LoginController {
@@ -27,7 +28,7 @@ class LoginController {
 
         $token = JWTAuth::fromUser($user);
 
-        \Log::info('Login Response', ['token' => $token, 'user' => $user]);
+        Log::info('Login Response', ['token' => $token, 'user' => $user]);
 
         return response()->json([
             'token' => $token,
