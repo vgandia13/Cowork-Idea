@@ -10,10 +10,10 @@ export async function PUT(req: NextRequest) {
     const response = await proxyRequest(req, {
       method: "PUT",
       url: `/users/${id}`,
-      data: body,
+      data: body as Partial<User>,
     });
     return NextResponse.json(response.data, { status: 200 });
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json(
       { error: error.response?.data?.message || "Error en la API externa" },
       { status: error.response?.status || 500 }
