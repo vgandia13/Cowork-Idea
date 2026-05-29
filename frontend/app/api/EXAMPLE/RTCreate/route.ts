@@ -1,33 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import axios from "axios";
+import { proxyRequest } from "@/lib/api";
 import { BusinessHours } from "@/types/BusinessHours";
 
 export async function POST(req: NextRequest) {
+  const body = await req.json();
   try {
-    const body = await req.json();
-    const response = await axios.post<BusinessHours>(
-      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1"}/business-hours`,
-      body,
-    );
-    if (response.status !== 201) {
-      return NextResponse.json(
-        { error: "Failed to create business hours" },
-        { status: response.status }
-      );
-    }
+    const response = await proxyRequest(req, {
+      method: "POST",
+      url: "/business-hours",
+      data: body,
+    });
     return NextResponse.json(response.data, { status: 201 });
-  } catch (error) {
-    if (error instanceof Error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    if (axios.isAxiosError(error)) {
-      return NextResponse.json(
-        {
-          error: error.response?.data?.message || "Error en la API externa",
-        },
-        { status: error.response?.status || 500 }
-      );
-    }
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.response?.data?.message || "Error en la API externa" },
+      { status: error.response?.status || 500 }
+    );
   }
 }

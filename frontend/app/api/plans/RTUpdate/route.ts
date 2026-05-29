@@ -1,25 +1,22 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
+import { NextRequest, NextResponse } from "next/server";
+import { proxyRequest } from "@/lib/api";
 import { MembershipPlan } from "@/types/MembershipPlan";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  const { id } = req.query;
+export async function PUT(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
+  const body = await req.json();
   try {
-    const response = await axios.put<MembershipPlan>(`${API_URL}/plans/${id}`, req.body);
-    res.status(200).json(response.data);
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return res.status(error.response?.status || 500).json({
-        error: error.response?.data?.message || "Error en la API externa",
-      });
-    }
-    if (error instanceof Error) {
-      return res.status(500).json({ error: error.message });
-    }
+    const response = await proxyRequest(req, {
+      method: "PUT",
+      url: `/plans/${id}`,
+      data: body,
+    });
+    return NextResponse.json(response.data, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.response?.data?.message || "Error en la API externa" },
+      { status: error.response?.status || 500 }
+    );
   }
 }

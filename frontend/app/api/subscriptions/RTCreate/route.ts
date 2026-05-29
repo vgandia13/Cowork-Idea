@@ -1,24 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
+import { NextRequest, NextResponse } from "next/server";
+import { proxyRequest } from "@/lib/api";
 import { Subscription } from "@/types/Subscription";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export async function POST(req: NextRequest) {
+  const body = await req.json();
   try {
-    const response = await axios.post<Subscription>(`${API_URL}/subscriptions`, req.body);
-    res.status(201).json(response.data);
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return res.status(error.response?.status || 500).json({
-        error: error.response?.data?.message || "Error en la API externa",
-      });
-    }
-    if (error instanceof Error) {
-      return res.status(500).json({ error: error.message });
-    }
+    const response = await proxyRequest(req, {
+      method: "POST",
+      url: "/subscriptions",
+      data: body,
+    });
+    return NextResponse.json(response.data, { status: 201 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.response?.data?.message || "Error en la API externa" },
+      { status: error.response?.status || 500 }
+    );
   }
 }
