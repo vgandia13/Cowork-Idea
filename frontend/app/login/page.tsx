@@ -7,6 +7,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/Context/AuthContext";
 
 interface Payload {
   email: string;
@@ -15,13 +16,13 @@ interface Payload {
 
 const LoginPage = () => {
   const router = useRouter();
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Payload>();
   const [viewPassword, setViewPassword] = useState(false);
-
   const onsubmit = async (data: Payload) => {
     try {
       const response = await fetch("/api/users/RTLogin", {
@@ -38,8 +39,7 @@ const LoginPage = () => {
         throw new Error(result.error || "Error al iniciar sesión");
       }
 
-      console.log("Inicio de sesión exitoso:", result);
-      
+      login(result.user);
       router.push("/");
     } catch (error) {
       console.error("Error en el login:", error);

@@ -18,6 +18,12 @@ export async function POST(req: NextRequest) {
     // El backend nos devuelve { "token": "...", "user": { ... } }
     const { token, user } = response.data;
 
+    const formattedUser = {
+      ...user,
+      firstName: user.first_name,
+      lastName: user.last_name,
+    };
+
     if (!token) {
       return NextResponse.json(
         { error: "El servidor no devolvió un token válido" },
@@ -33,7 +39,7 @@ export async function POST(req: NextRequest) {
       path: "/",
     });
 
-    const responseData = NextResponse.json({ user });
+    const responseData = NextResponse.json({ user: formattedUser });
     responseData.headers.append("Set-Cookie", serializedCookie);
     return responseData;
   } catch (error) {
