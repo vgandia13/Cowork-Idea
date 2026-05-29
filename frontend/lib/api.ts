@@ -17,6 +17,7 @@ export async function proxyRequest(req: NextRequest, config: AxiosRequestConfig)
       ...config,
       url: `${API_URL}${config.url}`,
       headers,
+      validateStatus: (status) => status < 500, // No tirar error automáticamente en 401 para permitir manejo manual
     });
     return response;
   } catch (error) {

@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
   try {
     console.log("Conectando a:", `${API_URL}/login`);
     const response = await axios.post(`${API_URL}/login`, { email, password });
-    const { token } = response.data;
+    // El backend nos devuelve { "token": "...", "user": { ... } }
+    const { token, user } = response.data;
 
     if (!token) {
       return NextResponse.json(
@@ -32,17 +33,7 @@ export async function POST(req: NextRequest) {
       path: "/",
     });
 
-    const tokenParts = token.split(".");
-    let userData = {};
-    if (tokenParts.length === 3) {
-      const payloadBase64 = tokenParts[1].replace(/-/g, "+").replace(/_/g, "/");
-      const payloadDecoded = Buffer.from(payloadBase64, "base64").toString(
-        "utf-8",
-      );
-      userData = JSON.parse(payloadDecoded);
-    }
-
-    const responseData = NextResponse.json({ user: userData });
+    const responseData = NextResponse.json({ user });
     responseData.headers.append("Set-Cookie", serializedCookie);
     return responseData;
   } catch (error) {

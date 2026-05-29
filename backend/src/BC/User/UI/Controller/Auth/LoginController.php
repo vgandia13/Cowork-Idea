@@ -27,6 +27,8 @@ class LoginController {
 
         $token = JWTAuth::fromUser($user);
 
+        \Log::info('Login Response', ['token' => $token, 'user' => $user]);
+
         return response()->json([
             'token' => $token,
             'user'  => $user,
