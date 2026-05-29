@@ -4,12 +4,14 @@ namespace Src\BC\User\Infrastructure\Repositories;
 
 use Src\BC\User\Application\Port\UserRepositoryPort;
 use Src\BC\User\Domain\Entities\User;
+use Src\BC\User\Domain\ValueObjects\UserEmailValueObject;
 use Src\BC\User\Domain\ValueObjects\UserIdValueObject;
 use Src\BC\User\Infrastructure\Hydrators\UserHydrator;
 use Src\BC\User\Infrastructure\Models\UserModel;
 use Src\BC\User\Infrastructure\Traits\CreateUserTrait;
 use Src\BC\User\Infrastructure\Traits\DeleteUserTrait;
 use Src\BC\User\Infrastructure\Traits\ListUsersTrait;
+use Src\BC\User\Infrastructure\Traits\ReadUserByEmailTrait;
 use Src\BC\User\Infrastructure\Traits\ReadUserTrait;
 use Src\BC\User\Infrastructure\Traits\UpdateUserTrait;
 
@@ -17,6 +19,7 @@ class EloquentUserRepository implements UserRepositoryPort
 {
     use CreateUserTrait;
     use ReadUserTrait;
+    use ReadUserByEmailTrait;
     use UpdateUserTrait;
     use DeleteUserTrait;
     use ListUsersTrait;
@@ -31,6 +34,15 @@ class EloquentUserRepository implements UserRepositoryPort
     public function findById(UserIdValueObject $id): ?User
     {
         $model = $this->findByIdFromModel($id->value());
+        if (!$model) {
+            return null;
+        }
+        return UserHydrator::toEntity($model);
+    }
+
+    public function findByEmail(UserEmailValueObject $email): ?User
+    {
+        $model = $this->findByEmailFromModel($email->value());
         if (!$model) {
             return null;
         }

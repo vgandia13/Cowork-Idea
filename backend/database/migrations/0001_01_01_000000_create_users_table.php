@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('password_hash');
-            $table->string('role')->default('Guest');
+            $table->string('role')->default('Member');
             $table->dateTime('registration_date');
             $table->boolean('active')->default(true);
             $table->timestamps();

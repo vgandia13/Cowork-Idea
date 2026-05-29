@@ -3,6 +3,7 @@
 namespace Src\BC\User\Application\Port;
 
 use Src\BC\User\Domain\Entities\User;
+use Src\BC\User\Domain\ValueObjects\UserEmailValueObject;
 use Src\BC\User\Domain\ValueObjects\UserIdValueObject;
 
 interface UserRepositoryPort
@@ -10,6 +11,8 @@ interface UserRepositoryPort
     public function create(User $entity): User;
 
     public function findById(UserIdValueObject $id): ?User;
+
+    public function findByEmail(UserEmailValueObject $email): ?User;
 
     public function update(User $entity): User;
 

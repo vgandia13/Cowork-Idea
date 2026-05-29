@@ -67,7 +67,7 @@ class User implements JsonSerializable {
             'last_name' => $this->getLastNameValue(),
             'email' => $this->getEmailValue(),
             'phone' => $this->getPhoneValue(),
-            'password_hash' => $this->getPasswordHashValue(),
+            //'password_hash' => $this->getPasswordHashValue(),
             'role' => $this->getRoleValue(),
             'registration_date' => $this->getRegistrationDateValue()?->format('c'),
             'active' => $this->getActiveValue(),
