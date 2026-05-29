@@ -54,16 +54,14 @@ use Src\BC\User\UI\Controller\ToggleActiveUserController;
 use Src\BC\User\UI\Controller\UpdateUserController;
 use Src\BC\User\UI\Controller\Auth\LoginController;
 use Src\BC\User\UI\Controller\Auth\LogoutController;
+use Src\BC\User\UI\Controller\Auth\RegisterController;
 
 Route::prefix('v1')->group(function () {
 
     // ─── Auth
-    Route::post('/auth/login',  LoginController::class);
-    Route::post('/auth/logout', LogoutController::class)->middleware('auth:api');
-
-
-    // Users
-    Route::post('/users', CreateUserController::class);
+        Route::post('/auth/login',      LoginController::class);
+    Route::post('/auth/register',   RegisterController::class);
+    Route::post('/auth/logout',     LogoutController::class)->middleware('auth:api');
 
     // Coworkings
     Route::get('/coworkings',                       ListCoworkingsController::class);
@@ -90,6 +88,7 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware(['auth:api'])->group(function () {
         Route::get('/users', ListUsersController::class)->middleware('role:admin');
+        Route::post('/users', CreateUserController::class)->middleware('role:admin');
         Route::get('/users/{id}', ReadUserController::class)->middleware('role:admin,member');
         Route::put('/users/{id}', UpdateUserController::class)->middleware('role:admin,member');
         Route::delete('/users/{id}', DeleteUserController::class)->middleware('role:admin');

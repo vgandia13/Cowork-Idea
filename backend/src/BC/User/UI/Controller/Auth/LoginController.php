@@ -21,6 +21,10 @@ class LoginController {
             return response()->json(['message' => 'Las credenciales no son correctas'], 401);
         }
 
+        if (!$user->active) {
+            return response()->json(['message' => 'Usuario desactivado'], 403);
+        }
+
         $token = JWTAuth::fromUser($user);
 
         return response()->json([
