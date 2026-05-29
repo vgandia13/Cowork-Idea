@@ -32,7 +32,7 @@ const RegisterPage = () => {
       first_name: data.firstName,
       last_name: data.lastName,
       email: data.email,
-      password_hash: data.password,
+      password: data.password,
       registration_date: new Date().toISOString().split('T')[0],
       active: true,
       phone: data.phone || null,
