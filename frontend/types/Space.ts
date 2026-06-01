@@ -1,17 +1,16 @@
 export interface Space {
     id: string;
-    coworkingId: string;
-    amenities: string;
+    coworking_id: string;
+    amenities: [];
     name: string;
     slug: string;
     type: SpaceType;
     description: string;
     capacity: number;
-    pricePerHour: number;
-    pricePerDay: number;
-    pricePerMonth: number;
-    size: number;
-    images: string[];
+    price_hour: number;
+    price_day: number;
+    price_month: number;
+    size_m2: number;
     available: boolean;
     status: SpaceStatus;
 }

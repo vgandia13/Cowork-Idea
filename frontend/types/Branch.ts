@@ -6,8 +6,7 @@ export interface Branch {
     slug: string;
     address: string;
     city: string;
-    country: string;
-    postalCode: string;
+    postal_code: string;
     phone: string;
     email: string;
     schedule: string;

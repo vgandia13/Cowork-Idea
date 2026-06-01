@@ -5,7 +5,7 @@ export interface MembershipPlan {
     price: number;
     duration: PlanDuration;
     credits: number;
-    meetingHours: number;
+    meeting_hours: number;
     access247: boolean;
     active: boolean;
 }

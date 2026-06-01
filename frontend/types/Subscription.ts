@@ -1,10 +1,10 @@
 export interface Subscription {
     id: string;
-    userId: string;
-    planId: string;
-    startDate: Date;
-    endDate: Date;
-    autoRenewal: boolean;
+    user_id: string;
+    plan_id: string;
+    start_date: Date;
+    end_date: Date;
+    auto_renewal: boolean;
     status: SubscriptionStatus;
 }
 
