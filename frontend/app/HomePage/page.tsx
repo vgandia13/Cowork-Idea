@@ -2,17 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Search,
-  Zap,
-  Coffee,
-  Wifi,
-  Users,
-  Maximize2,
-  CheckCircle2,
-  XCircle,
-  Mail,
-} from "lucide-react";
+import { Search, Zap, Coffee, Wifi, Users, Maximize2, CheckCircle2, XCircle, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Space, SpaceType } from "@/types/Space";
@@ -21,17 +11,18 @@ const HomePage = () => {
   const [spaces, setSpaces] = useState<Space[]>([]);
 
   useEffect(() => {
-    const fetchSpaces = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch("/api/spaces/RTGetAll", { method: "GET" });
-        const resData = await response.json();
-        console.log("Datos recibidos de la API:", resData);
-        setSpaces(resData.data || []);
+        const [spacesRes] = await Promise.all([
+          fetch("/api/spaces/RTGetAll", { method: "GET" }),
+        ]);
+        const spacesData = await spacesRes.json();
+        setSpaces(spacesData.data || []);
       } catch (error) {
-        console.error("Error al cargar los espacios:", error);
+        console.error("Error al cargar los datos:", error);
       }
     };
-    fetchSpaces();
+    fetchData();
   }, []);
 
   // Función auxiliar para formatear los tipos de espacio visualmente
