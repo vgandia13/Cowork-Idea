@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const response = await proxyRequest(req, {
       method: "POST",
-      url: "/users",
+      url: "/auth/register",
       data: body,
     });
     return NextResponse.json(response.data, { status: 201 });
