@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { proxyRequest } from "@/lib/api";
-import { Space } from "@/types/Space";
 
 export async function GET(req: NextRequest) {
   try {
