@@ -16,10 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body>
+      <body className="bg-slate-50">
         <AuthProvider>
           <Navbar />
-          {children}
+          <main className="pt-20">
+            {children}
+          </main>
         </AuthProvider>
       </body>
     </html>

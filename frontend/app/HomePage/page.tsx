@@ -11,7 +11,9 @@ import {
   Maximize2,
   CheckCircle2,
   XCircle,
+  Mail,
 } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Space, SpaceType } from "@/types/Space";
 
@@ -60,7 +62,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8 space-y-16">
+    <div className="min-h-screen p-8 space-y-16">
       {/* Hero Section */}
       <section className="text-center space-y-4 max-w-2xl mx-auto pt-8">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
@@ -254,19 +256,27 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="text-center bg-slate-900 text-white p-12 rounded-2xl max-w-6xl mx-auto shadow-sm">
-        <h2 className="text-3xl font-bold mb-3">¿Listo para empezar?</h2>
-        <p className="text-slate-400 max-w-md mx-auto mb-6 text-sm">
-          Únete a nuestra comunidad y accede a flexibilidad total en tus
-          espacios de trabajo.
-        </p>
-        <Button
-          size="lg"
-          className="bg-white text-slate-900 hover:bg-slate-100 font-semibold shadow-md"
-        >
-          Explorar todos los espacios
-        </Button>
-      </section>
+      <div className="max-w-6xl mx-auto flex items-center justify-end gap-6">
+        <section className="text-center bg-slate-900 text-white p-12 rounded-2xl grow shadow-sm">
+          <h2 className="text-3xl font-bold mb-3">¿Listo para empezar?</h2>
+          <p className="text-slate-400 max-w-md mx-auto mb-6 text-sm">
+            Únete a nuestra comunidad y accede a flexibilidad total en tus
+            espacios de trabajo.
+          </p>
+          <Button
+            size="lg"
+            className="bg-white text-slate-900 hover:bg-slate-100 font-semibold shadow-md"
+          >
+            Explorar todos los espacios
+          </Button>
+        </section>
+
+        <Link href="/contact">
+          <div className="w-16 h-16 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-slate-800 shadow-md transition-colors">
+            <Mail className="w-8 h-8" />
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };

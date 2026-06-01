@@ -26,7 +26,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="flex items-center justify-between p-4 border-b bg-white">
+    <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between p-4 border-b bg-white/95 backdrop-blur-sm">
       <div className="text-xl font-bold text-text-dark">
         <Link href="/">CoworkSpace</Link>
       </div>
