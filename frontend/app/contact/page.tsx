@@ -1,5 +1,10 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+
 const ContactPage = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -16,13 +21,13 @@ const ContactPage = () => {
         <h1 className="text-2xl font-bold mb-6 text-center">Contáctanos</h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label
+            <Label
               htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
               Nombre
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               id="name"
               name="name"
@@ -32,13 +37,13 @@ const ContactPage = () => {
             />
           </div>
           <div>
-            <label
+            <Label
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
               Correo Electrónico
-            </label>
-            <input
+            </Label>
+            <Input
               type="email"
               id="email"
               name="email"
@@ -48,29 +53,28 @@ const ContactPage = () => {
             />
           </div>
           <div>
-            <label
+            <Label
               htmlFor="message"
               className="block text-sm font-medium text-gray-700"
             >
               Mensaje
-            </label>
-            <textarea
+            </Label>
+            <Textarea
               id="message"
               name="message"
               maxLength={500}
-              rows={4}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Tu mensaje"
               required
             />
           </div>
           <div>
-            <button
+            <Button
               type="submit"
               className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:text-sm"
             >
               Enviar
-            </button>
+            </Button>
           </div>
         </form>
       </div>
